@@ -2,7 +2,9 @@
 
 Utility interface
 
-User extends Utility
+------------------------
+--User extends Utility--
+------------------------
   
   Variables:
   - id
