@@ -1,0 +1,15 @@
+package szarch;
+
+public class Main {
+
+	public static void main(String[] args) {
+		// TODO Auto-generated method stub
+		User user = new User();
+		user.set_name("Andras");
+		user.set_pw("akarmi");
+		user.set_role_id(1);
+		
+		user.add(user);
+	}
+
+}
