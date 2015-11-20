@@ -28,5 +28,10 @@ User extends Utility
   - aes_key for DB encrypt/decrypt (encryption included at source code)
   
   Methods:
-  - int add(User)
+  - int add(User user)
+    - id must be null!
+    - name and password and role_id must be not null
+
+  - List<User> get(User user)
+    - password must be null! 
 
