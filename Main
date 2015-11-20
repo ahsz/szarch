@@ -1,15 +1,48 @@
 package szarch;
 
+import java.util.ArrayList;
+import java.util.List;
+
 public class Main {
 
 	public static void main(String[] args) {
 		// TODO Auto-generated method stub
 		User user = new User();
+		
 		user.set_name("Andras");
 		user.set_pw("akarmi");
 		user.set_role_id(1);
-		
 		user.add(user);
+		
+		user.set_name("Keremi");
+		user.set_pw("akarmi");
+		user.set_role_id(1);
+		user.add(user);
+		
+		user.set_id(null);
+		user.set_name("Andras");
+		user.set_pw(null);
+		user.set_role_id(1);
+	
+		List<User> usr_list = new ArrayList<User>();
+		
+		usr_list = user.get(user);
+		
+		System.out.print(usr_list.get(0).get_id() + "\t" + usr_list.get(0).get_name() + "\t" + usr_list.get(0).get_pw() + "\t" + usr_list.get(0).get_role_id());
+		
+		user.set_id(null);
+		user.set_name("Keremi");
+		user.set_pw(null);
+		user.set_role_id(null);
+
+		user.delete(user);
+		
+		user.set_id(usr_list.get(0).get_id());
+		user.set_name("Andras2");
+		user.set_pw(null);
+		user.set_role_id(null);
+		
+		user.update(user);
 	}
 
 }
