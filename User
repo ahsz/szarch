@@ -5,9 +5,6 @@ import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
 
-import org.eclipse.jdt.annotation.Nullable;
-
-
 public class User implements Utility<User>{
 
 	private java.lang.Integer id;
@@ -31,12 +28,11 @@ public class User implements Utility<User>{
 	
 	static { aes_key = "akarmi"; }
 	
-	public User(){
+	User(){
 		this.id = null;
 		this.name = null;
 		this.password = null;
 		this.role_id = 0;	
-
 	}
 	
 	/* add new user
@@ -52,17 +48,19 @@ public class User implements Utility<User>{
 		
 		int user_id = 0;
 		
+		if (user.get_id() != null){
+			System.out.print("id is not null!");
+			return user_id;
+		}
+		
 		if (user.get_name() == null || user.get_pw() == null || user.get_role_id() == null){
 			System.out.print("Name or password or role_id is not filled!");
 			return user_id;
 		}
-		if (user.id != null)
-			System.out.print("ID is filled, but it will not be used in database!");
 		
 		try {
 			String query = "INSERT INTO user VALUES (null,?,AES_ENCRYPT(?,?),?)";
-			//String query = "INSERT INTO user VALUES (null,?,?,?)";
-			
+		
 			java.sql.PreparedStatement stmt = conn.prepareStatement(query);
 			
 			int i = 1;
@@ -75,7 +73,7 @@ public class User implements Utility<User>{
 			
 			query = "SELECT * FROM user WHERE name = ?";	
 			stmt = conn.prepareStatement(query);
-			stmt.setString(1, name);
+			stmt.setString(1, user.get_name());
 			ResultSet r = stmt.executeQuery();
 			r.next();
 			user_id = r.getInt("id");
@@ -150,8 +148,6 @@ public class User implements Utility<User>{
 		return usr_list;
 	}
 
-	
-	
 	public void delete(User user){
 		if (user.get_pw() != null){
 			System.out.print("Password is not null!");
@@ -196,7 +192,7 @@ public class User implements Utility<User>{
 	public void update(User user){
 		
 		if (user.get_id() == null){
-			System.out.print("ID is null!");
+			System.out.print("id is null!");
 			return;
 		}
 		if (user.get_name() == null && user.get_pw() == null && user.get_role_id() == null){
@@ -234,5 +230,6 @@ public class User implements Utility<User>{
 		   System.out.println("SQLState: " + ex.getSQLState());
 		   System.out.println("VendorError: " + ex.getErrorCode());
 		}
-	}
+	}		
+	
 }
