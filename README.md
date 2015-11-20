@@ -4,7 +4,17 @@
 Utility interface
 -----------------
 
----------------------------------------------------------------------------------------------------------------------------------
+  Variables:
+  - connect (for set up DB connection)
+  - conn (for storage DB connection)
+
+  Methods:
+  - int add(T object)
+  - List<T> get(T object)
+  - void delete(T object)
+  - void update(T object)
+
+-------------------------------------------------------------------------------------------------------------------------------
 
 --------------------
 User extends Utility
