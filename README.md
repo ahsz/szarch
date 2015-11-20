@@ -3,6 +3,7 @@
 Utility interface
 
 User extends Utility
+  
   Variables:
   - id
   - name
