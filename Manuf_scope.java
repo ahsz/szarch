@@ -12,15 +12,15 @@ public class Manuf_scope implements Utility<Manuf_scope> {
 	private String deadline;
 	
 	
-	public java.lang.Integer get_id() { return id; }
-	public String get_ms_id() { return ms_id; }
-	public java.lang.Integer get_is_ordered() { return is_ordered; }	
-	public String get_deadline() { return deadline; }	
+	public java.lang.Integer get_id() 			{ return id; }
+	public String get_ms_id() 					{ return ms_id; }
+	public java.lang.Integer get_is_ordered() 	{ return is_ordered; }	
+	public String get_deadline() 				{ return deadline; }	
 	
-	public void set_id(java.lang.Integer id) { this.id = id; }
-	public void set_ms_id(String ms_id) { this.ms_id = ms_id; };
-	public void set_is_ordered(java.lang.Integer is_ordered) { this.is_ordered = is_ordered; }
-	public void set_deadline(String deadline) { this.deadline = deadline; }
+	public void set_id(java.lang.Integer id) 					{ this.id = id; }
+	public void set_ms_id(String ms_id) 						{ this.ms_id = ms_id; };
+	public void set_is_ordered(java.lang.Integer is_ordered) 	{ this.is_ordered = is_ordered; }
+	public void set_deadline(String deadline) 					{ this.deadline = deadline; }
 	
 	public Manuf_scope(){
 		this.id = null;
@@ -37,7 +37,7 @@ public class Manuf_scope implements Utility<Manuf_scope> {
 	 * Add a new manufacturing scope to the database. 
 	 *
 	 * @param  Manuf_scope 	the manufacturing scope what is will be added to the database
-	 * @return      		the database id of the newly added user
+	 * @return int    		0 - error, else - the database id of the newly added user
 	 */
 	@Override
 	public int add(Manuf_scope manuf_scope) {
@@ -183,7 +183,7 @@ public class Manuf_scope implements Utility<Manuf_scope> {
 	}
 	
 	/**
-	 * Update one manufacturing scope in the database.
+	 * Update one manufacturing scope in the database, search by its id or ms_id.
 	 *
 	 * @param  Manuf_scope the manufacturing scope what will be updated
 	 * @return void
@@ -229,6 +229,7 @@ public class Manuf_scope implements Utility<Manuf_scope> {
 		   System.out.println("SQLException: " + ex.getMessage());
 		   System.out.println("SQLState: " + ex.getSQLState());
 		   System.out.println("VendorError: " + ex.getErrorCode());
-		}		
+		}
+		return;
 	}
 }
