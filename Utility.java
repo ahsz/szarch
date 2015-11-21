@@ -12,6 +12,4 @@ public interface Utility<T>{
 	
 	int add(T object);
 
-	
-	
 }
