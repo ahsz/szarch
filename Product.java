@@ -10,11 +10,11 @@ public class Product implements Utility<Product> {
 	private java.lang.Integer id;
 	private String name;
 	
-	public java.lang.Integer get_id() { return id; }
-	public String get_name() { return name; }
+	public java.lang.Integer get_id() 	{ return id; }
+	public String get_name() 			{ return name; }
 	
-	public void set_id(java.lang.Integer id) { this.id = id; }
-	public void set_name(String name) { this.name = name; }
+	public void set_id(java.lang.Integer id) 	{ this.id = id; }
+	public void set_name(String name) 			{ this.name = name; }
 	
 	public Product(){
 		this.id = null;
@@ -150,7 +150,7 @@ public class Product implements Utility<Product> {
 	}
 
 	/**
-	 * Update one product in the database.
+	 * Update one product in the database, search by its id..
 	 *
 	 * @param  Product the product what will be updated
 	 * @return void
