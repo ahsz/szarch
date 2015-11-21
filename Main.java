@@ -10,12 +10,14 @@ public class Main {
 		User user = new User();
 		Role role = new Role();
 		Manuf_scope manuf_scope = new Manuf_scope();
+		Order order = new Order();
 		
 		/**
 		 *  Clear DB
 		 */
 		user.delete(user);
 		role.delete(role);
+		order.delete(order);
 		manuf_scope.delete(manuf_scope);
 		
 		
@@ -124,11 +126,58 @@ public class Main {
 		manuf_scope.update(manuf_scope);
 		*/
 		
+		
+		/**
+		 *  Order class test
+		 */	
+		/*
+		manuf_scope.set_ms_id("manuf_scope3");
+		manuf_scope.set_is_ordered(0);
+		manuf_scope.set_deadline("20151201");
+		manuf_scope.add(manuf_scope);
+
+		order.set_manuf_scope_id(manuf_scope.get(manuf_scope).get(0).get_id());
+		order.set_product_id(1);//product.get(product).get(0).get_id());
+		order.set_number(10);
+		order.add(order);
+		
+		manuf_scope.set_ms_id("manuf_scope4");
+		manuf_scope.set_is_ordered(0);
+		manuf_scope.set_deadline("20151201");
+		manuf_scope.add(manuf_scope);
+		
+		order.set_manuf_scope_id(manuf_scope.get(manuf_scope).get(0).get_id());
+		order.set_product_id(1);//product.get(product).get(0).get_id());
+		order.set_number(10);
+		order.add(order);
+
+		List<Order> ord_list = new ArrayList<Order>();
+		
+		ord_list = order.get(order);
+		
+		System.out.println(ord_list.get(0));
+		
+
+		order.delete(order);
+		
+		manuf_scope.set_ms_id("manuf_scope3");
+		manuf_scope.set_is_ordered(0);
+		manuf_scope.set_deadline("20151201");
+		
+		order.set_manuf_scope_id(manuf_scope.get(manuf_scope).get(0).get_id());
+		order.set_product_id(1);//product.get(product).get(0).get_id());
+		order.set_number(15);
+		
+		order.update(order);
+		*/
+		
+		
 		/**
 		 *  Clear DB
 		 */
 		user.delete(user);
 		role.delete(role);
-		manuf_scope.delete(manuf_scope);	
+		order.delete(order);
+		manuf_scope.delete(manuf_scope);
 	}
 }
