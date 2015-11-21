@@ -9,7 +9,6 @@ public class Role implements Utility<Role> {
 	private java.lang.Integer id;
 	private String name;
 	
-	
 	public java.lang.Integer get_id() { return id; }
 	public String get_name() { return name; }
 	
