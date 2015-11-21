@@ -12,17 +12,17 @@ public class Component implements Utility<Component> {
 	private java.lang.Integer purch_time;
 	private java.lang.Integer price;
 	
-	public java.lang.Integer get_id() { return id; }
-	public String get_name() { return name; }
-	public java.lang.Integer get_is_complex() { return is_complex; }
-	public java.lang.Integer get_purch_time() { return purch_time; }
-	public java.lang.Integer get_price() { return price; }
+	public java.lang.Integer get_id() 			{ return id; }
+	public String get_name() 					{ return name; }
+	public java.lang.Integer get_is_complex() 	{ return is_complex; }
+	public java.lang.Integer get_purch_time() 	{ return purch_time; }
+	public java.lang.Integer get_price() 		{ return price; }
 	
-	public void set_id(java.lang.Integer id) { this.id = id; }
-	public void set_name(String name) { this.name = name; }
-	public void set_is_complex(java.lang.Integer is_complex) { this.is_complex = is_complex; }
-	public void set_purch_time(java.lang.Integer purch_time) { this.purch_time = purch_time; }
-	public void set_price(java.lang.Integer price) { this.price = price; }
+	public void set_id(java.lang.Integer id) 					{ this.id = id; }
+	public void set_name(String name) 							{ this.name = name; }
+	public void set_is_complex(java.lang.Integer is_complex) 	{ this.is_complex = is_complex; }
+	public void set_purch_time(java.lang.Integer purch_time) 	{ this.purch_time = purch_time; }
+	public void set_price(java.lang.Integer price) 				{ this.price = price; }
 	
 	public Component(){
 		this.id = null;
