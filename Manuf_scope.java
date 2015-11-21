@@ -190,7 +190,7 @@ public class Manuf_scope implements Utility<Manuf_scope> {
 	 */
 	@Override
 	public void update(Manuf_scope manuf_scope) {
-		if (manuf_scope.get_ms_id() == null && manuf_scope.get_ms_id() == null){
+		if (manuf_scope.get_id() == null && manuf_scope.get_ms_id() == null){
 			System.out.print("both id and ms_id is null!");
 			return;
 		}
