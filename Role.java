@@ -10,11 +10,11 @@ public class Role implements Utility<Role> {
 	private String name;
 	
 	
-	public java.lang.Integer get_id() { return id; }
-	public String get_name() { return name; }
+	public java.lang.Integer get_id() 		{ return id; }
+	public String get_name() 				{ return name; }
 	
-	public void set_id(java.lang.Integer id) { this.id = id; }
-	public void set_name(String name) { this.name = name; }
+	public void set_id(java.lang.Integer id) 	{ this.id = id; }
+	public void set_name(String name) 			{ this.name = name; }
 
 	public Role(){
 		this.id = null;
@@ -29,7 +29,7 @@ public class Role implements Utility<Role> {
 	 * Add a new role to the database. 
 	 *
 	 * @param  Role the role what is will be added to the database
-	 * @return      the database id of the newly added user
+	 * @return int  0 - error, else - the database id of the newly added user
 	 */
 	@Override
 	public int add(Role role) {
@@ -42,7 +42,7 @@ public class Role implements Utility<Role> {
 		}
 		
 		if (role.get_name() == null){
-			System.out.print("name or password or role_id is null!");
+			System.out.print("name is null!");
 			return role_id;
 		}
 		
@@ -75,7 +75,7 @@ public class Role implements Utility<Role> {
 	 * List role(s) from the database.
 	 *
 	 * @param  Role       the role(s) what is searched for
-	 * @return List<User> ArrayList of the role(s)
+	 * @return List<Role> ArrayList of the role(s)
 	 */
 	@Override
 	public List<Role> get(Role role) {
@@ -119,7 +119,7 @@ public class Role implements Utility<Role> {
 	 * Delete role(s) from the database.
 	 * With null Role all user will be deleted!
 	 *
-	 * @param  Role       the role(s) what will be deleted
+	 * @param  Role the role(s) what will be deleted
 	 * @return void
 	 */
 	@Override
@@ -152,7 +152,7 @@ public class Role implements Utility<Role> {
 	}
 	
 	/**
-	 * Update one role in the database.
+	 * Update one role in the database, search by its id.
 	 *
 	 * @param  Role the role what will be updated
 	 * @return void
@@ -169,7 +169,7 @@ public class Role implements Utility<Role> {
 		}
 		
 		try {	
-			String query = "UPDATE role SET name=? WHERE id = ?";
+			String query = "UPDATE role SET name = ? WHERE id = ?";
 			
 			java.sql.PreparedStatement stmt = conn.prepareStatement(query);
 			
