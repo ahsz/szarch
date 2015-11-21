@@ -11,6 +11,7 @@ public class Manuf_scope implements Utility<Manuf_scope> {
 	private java.lang.Integer is_ordered;
 	private String deadline;
 	
+	
 	public java.lang.Integer get_id() { return id; }
 	public String get_ms_id() { return ms_id; }
 	public java.lang.Integer get_is_ordered() { return is_ordered; }	
@@ -32,6 +33,12 @@ public class Manuf_scope implements Utility<Manuf_scope> {
 		return id + "\t" + ms_id + "\t" + is_ordered + "\t" + deadline;
 	}
 	
+	/**
+	 * Add a new manufacturing scope to the database. 
+	 *
+	 * @param  Manuf_scope 	the manufacturing scope what is will be added to the database
+	 * @return      		the database id of the newly added user
+	 */
 	@Override
 	public int add(Manuf_scope manuf_scope) {
 		
@@ -43,7 +50,7 @@ public class Manuf_scope implements Utility<Manuf_scope> {
 		}
 		
 		if (manuf_scope.get_ms_id() == null || manuf_scope.get_is_ordered() == null || manuf_scope.get_deadline() == null){
-			System.out.print("ms_id or is_ordered or deadline is not filled!");
+			System.out.print("ms_id or is_ordered or deadline is null!");
 			return manuf_scope_id;
 		}
 		
@@ -73,7 +80,13 @@ public class Manuf_scope implements Utility<Manuf_scope> {
 		}
 		return manuf_scope_id;
 	}
-	
+
+	/**
+	 * List manufacturing scope(s) from the database.
+	 *
+	 * @param  Manuf_scope       the manufacturing scope(s) what is searched for
+	 * @return List<Manuf_scope> ArrayList of the manufacturing scope(s)
+	 */
 	@Override
 	public List<Manuf_scope> get(Manuf_scope manuf_scope) {
 		
@@ -124,6 +137,13 @@ public class Manuf_scope implements Utility<Manuf_scope> {
 		return msc_list;
 	}
 	
+	/**
+	 * Delete manufacturing scope(s) from the database.
+	 * With null Manuf_scope all manufacturing scope will be deleted!
+	 *
+	 * @param  Manuf_scope the manufacturing scope(s) what will be deleted
+	 * @return void
+	 */
 	@Override
 	public void delete(Manuf_scope manuf_scope) {
 		try {	
@@ -162,14 +182,20 @@ public class Manuf_scope implements Utility<Manuf_scope> {
 		}		
 	}
 	
+	/**
+	 * Update one manufacturing scope in the database.
+	 *
+	 * @param  Manuf_scope the manufacturing scope what will be updated
+	 * @return void
+	 */
 	@Override
 	public void update(Manuf_scope manuf_scope) {
 		if (manuf_scope.get_ms_id() == null && manuf_scope.get_ms_id() == null){
-			System.out.print("Both id and ms_id is null!");
+			System.out.print("both id and ms_id is null!");
 			return;
 		}
 		if (manuf_scope.get_is_ordered() == null && manuf_scope.get_deadline() == null){
-			System.out.print("Both is_ordered and deadline is null!");
+			System.out.print("both is_ordered and deadline is null!");
 			return;
 		}
 		
