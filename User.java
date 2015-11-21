@@ -42,7 +42,7 @@ public class User implements Utility<User>{
 	 * Add a new user to the database. 
 	 *
 	 * @param  User the user what is will be added to the database
-	 * @return      the database id of the newly added user
+	 * @return int  0 - error, else - the database id of the newly added user
 	 */
 	@Override
 	public int add(User user) {
@@ -107,7 +107,6 @@ public class User implements Utility<User>{
 		
 		try {	
 			String query = "SELECT id, name, AES_DECRYPT(password,?) AS password, role_id FROM user";
-			//String query = "SELECT * FROM user";
 			if (user.get_id() != null || user.get_name() != null || user.get_role_id() != null)	
 				query += " WHERE";
 			if (user.get_id() != null)									
@@ -136,6 +135,7 @@ public class User implements Utility<User>{
 				usr.set_id(r.getInt("id"));
 				usr.set_name(r.getString("name"));;
 				usr.set_pw(r.getString("password"));
+				usr.set_role_id(r.getInt("role_id"));
 				usr_list.add(usr);
 			}	
 		} catch (SQLException ex) {
@@ -191,7 +191,7 @@ public class User implements Utility<User>{
 	}
 	
 	/**
-	 * Update one user in the database.
+	 * Update one user in the database, search by its id.
 	 *
 	 * @param  User the user what will be updated
 	 * @return void
