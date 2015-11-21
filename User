@@ -24,7 +24,7 @@ public class User implements Utility<User>{
 	public void set_pw(String new_pw)							{ password = new_pw; }
 	public void set_role_id(java.lang.Integer new_role_id) 		{ role_id = new_role_id; }
 	public void set_aes_key(String new_aes_key)					{ aes_key = new_aes_key; }
- 
+	  
 	static { aes_key = "akarmi"; }
 	
 	User(){
@@ -38,13 +38,11 @@ public class User implements Utility<User>{
 		return id + "\t" + name + "\t" + password + "\t" + role_id + "\t" + aes_key;
 	}
 	
-	/* add new user
-	 * 
-	 * Parameters
-	 * 		Instance of User with filled name, password, role_id
-	 * 
-	 * Return 
-	 * 		The ID of the new database row.
+	/**
+	 * Add a new user to the database. 
+	 *
+	 * @param  User the user what is will be added to the database
+	 * @return      the database id of the newly added user
 	 */
 	@Override
 	public int add(User user) {
@@ -57,7 +55,7 @@ public class User implements Utility<User>{
 		}
 		
 		if (user.get_name() == null || user.get_pw() == null || user.get_role_id() == null){
-			System.out.print("Name or password or role_id is not filled!");
+			System.out.print("Name or password or role_id is null!");
 			return user_id;
 		}
 		
@@ -91,22 +89,19 @@ public class User implements Utility<User>{
 	}
 
 
-	/* get user(s)
-	 * 
-	 * Parameters
-	 * 		Instance of User with empty or filled id, name, role_id
-	 * 		Password must be null.
-	 * 
-	 * Return 
-	 * 		The ID of the new database row.
-	 */	
+	/**
+	 * List user(s) from the database.
+	 *
+	 * @param  User       the user(s) what is searched for
+	 * @return List<User> ArrayList of the users
+	 */
 	@Override
 	public List<User> get(User user){
 
 		List<User> usr_list = new ArrayList<User>();
 		
 		if (user.get_pw() != null){
-			System.out.print("Password is not null!");
+			System.out.print("password is not null!");
 			return null;
 		}
 		
@@ -151,9 +146,16 @@ public class User implements Utility<User>{
 		return usr_list;
 	}
 
+	/**
+	 * Delete user(s) from the database.
+	 * With null User all user will be deleted!
+	 *
+	 * @param  User       the user(s) what will be deleted
+	 * @return void
+	 */
 	public void delete(User user){
 		if (user.get_pw() != null){
-			System.out.print("Password is not null!");
+			System.out.print("password is not null!");
 			return;
 		}
 		
@@ -188,9 +190,11 @@ public class User implements Utility<User>{
 		}
 	}
 	
-	/* Update row by ID 
-	 * 
-	 * 
+	/**
+	 * Update one user in the database.
+	 *
+	 * @param  User the user what will be updated
+	 * @return void
 	 */
 	public void update(User user){
 		
@@ -199,7 +203,7 @@ public class User implements Utility<User>{
 			return;
 		}
 		if (user.get_name() == null && user.get_pw() == null && user.get_role_id() == null){
-			System.out.print("Both of name, password and role_id is null!");
+			System.out.print("both of name, password and role_id is null!");
 			return;
 		}
 		
