@@ -21,6 +21,10 @@ public class Role implements Utility<Role> {
 		this.name = null;
 	}
 	
+	public String toString() {
+		return id + "\t" + name;
+	}
+	
 	@Override
 	public int add(Role role) {
 		
@@ -103,7 +107,7 @@ public class Role implements Utility<Role> {
 	public void delete(Role role) {
 
 		try {	
-			String query = "DELETE FROM user ";
+			String query = "DELETE FROM role ";
 			if (role.get_id() != null || role.get_name() != null)
 				query += " WHERE";
 			if (role.get_id() != null)									
