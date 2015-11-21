@@ -10,13 +10,13 @@ public class Order implements Utility<Order> {
 	private java.lang.Integer product_id;
 	private java.lang.Integer number;
 
-	public java.lang.Integer get_manuf_scope_id() { return manuf_scope_id; }
-	public java.lang.Integer get_product_id() { return product_id; }
-	public java.lang.Integer get_number() { return number; }
+	public java.lang.Integer get_manuf_scope_id()	{ return manuf_scope_id; }
+	public java.lang.Integer get_product_id() 		{ return product_id; }
+	public java.lang.Integer get_number() 			{ return number; }
 	
-	public void set_manuf_scope_id(java.lang.Integer manuf_scope_id) { this.manuf_scope_id = manuf_scope_id; }
-	public void set_product_id(java.lang.Integer product_id) { this.product_id = product_id; }
-	public void set_number(java.lang.Integer number) { this.number = number; }
+	public void set_manuf_scope_id(java.lang.Integer manuf_scope_id) 	{ this.manuf_scope_id = manuf_scope_id; }
+	public void set_product_id(java.lang.Integer product_id) 			{ this.product_id = product_id; }
+	public void set_number(java.lang.Integer number) 					{ this.number = number; }
 
 	public Order(){
 		this.manuf_scope_id = null;
@@ -32,7 +32,7 @@ public class Order implements Utility<Order> {
 	 * Add a new order to the database. 
 	 *
 	 * @param  Order the order what is will be added to the database
-	 * @return int   1 - added, else - error
+	 * @return int   1 - added, 0 - error
 	 */
 	@Override
 	public int add(Order order) {
@@ -62,7 +62,7 @@ public class Order implements Utility<Order> {
 			stmt.setInt(2, order.get_product_id());
 			ResultSet r = stmt.executeQuery();
 			r.next();
-			if (r.getInt("manuf_scope_id") == order.get_manuf_scope_id() && r.getInt("product_id") == order.get_product_id())
+			if (r.getInt("manuf_scope_id") == order.get_manuf_scope_id() && r.getInt("product_id") == order.get_product_id() && r.getInt("number") == order.get_number())
 				order_id = 1;
 			
 		} catch (SQLException ex) {
@@ -169,7 +169,7 @@ public class Order implements Utility<Order> {
 	}
 
 	/**
-	 * Update one order in the database.
+	 * Update one order in the database, search by its manuf_scope_id and product_id.
 	 *
 	 * @param  Order the order what will be updated
 	 * @return void
