@@ -11,6 +11,7 @@ public class Main {
 		Role role = new Role();
 		Manuf_scope manuf_scope = new Manuf_scope();
 		Order order = new Order();
+		Product product = new Product();
 		
 		/**
 		 *  Clear DB
@@ -19,6 +20,7 @@ public class Main {
 		role.delete(role);
 		order.delete(order);
 		manuf_scope.delete(manuf_scope);
+		product.delete(product);
 		
 		
 		/**
@@ -131,23 +133,26 @@ public class Main {
 		 *  Order class test
 		 */	
 		/*
-		manuf_scope.set_ms_id("manuf_scope3");
+		manuf_scope.set_ms_id("manuf_scope10");
 		manuf_scope.set_is_ordered(0);
 		manuf_scope.set_deadline("20151201");
 		manuf_scope.add(manuf_scope);
 
+		product.set_name("product10");
+		product.add(product);
+		
 		order.set_manuf_scope_id(manuf_scope.get(manuf_scope).get(0).get_id());
-		order.set_product_id(1);//product.get(product).get(0).get_id());
+		order.set_product_id(product.get(product).get(0).get_id());
 		order.set_number(10);
 		order.add(order);
 		
-		manuf_scope.set_ms_id("manuf_scope4");
+		manuf_scope.set_ms_id("manuf_scope11");
 		manuf_scope.set_is_ordered(0);
 		manuf_scope.set_deadline("20151201");
 		manuf_scope.add(manuf_scope);
 		
 		order.set_manuf_scope_id(manuf_scope.get(manuf_scope).get(0).get_id());
-		order.set_product_id(1);//product.get(product).get(0).get_id());
+		order.set_product_id(product.get(product).get(0).get_id());
 		order.set_number(10);
 		order.add(order);
 
@@ -157,20 +162,49 @@ public class Main {
 		
 		System.out.println(ord_list.get(0));
 		
-
 		order.delete(order);
 		
-		manuf_scope.set_ms_id("manuf_scope3");
+		manuf_scope.set_ms_id("manuf_scope10");
 		manuf_scope.set_is_ordered(0);
 		manuf_scope.set_deadline("20151201");
 		
 		order.set_manuf_scope_id(manuf_scope.get(manuf_scope).get(0).get_id());
-		order.set_product_id(1);//product.get(product).get(0).get_id());
+		order.set_product_id(product.get(product).get(0).get_id());
 		order.set_number(15);
 		
 		order.update(order);
 		*/
 		
+		/**
+		 *  Product class test
+		 */
+		/*
+		product.set_name("axe");
+		product.add(product);
+		
+		product.set_name("hammer");
+		product.add(product);
+		
+		product.set_id(null);
+		product.set_name("axe");
+
+	
+		List<Product> prd_list = new ArrayList<Product>();
+		
+		prd_list = product.get(product);
+		
+		System.out.println(prd_list.get(0));
+		
+		product.set_id(null);
+		product.set_name("hammer");
+
+		product.delete(product);
+		
+		product.set_id(prd_list.get(0).get_id());
+		product.set_name("big_axe");
+	
+		product.update(product);
+		*/
 		
 		/**
 		 *  Clear DB
@@ -179,5 +213,6 @@ public class Main {
 		role.delete(role);
 		order.delete(order);
 		manuf_scope.delete(manuf_scope);
+		product.delete(product);
 	}
 }
