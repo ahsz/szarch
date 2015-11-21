@@ -25,14 +25,17 @@ public class User implements Utility<User>{
 	public void set_role_id(java.lang.Integer new_role_id) 		{ role_id = new_role_id; }
 	public void set_aes_key(String new_aes_key)					{ aes_key = new_aes_key; }
 	
-	
+	public String toString() {
+		return id + "\t" + name + "\t" + password + "\t" + role_id + "\t" + aes_key;
+	}
+	  
 	static { aes_key = "akarmi"; }
 	
 	User(){
 		this.id = null;
 		this.name = null;
 		this.password = null;
-		this.role_id = 0;	
+		this.role_id = null;	
 	}
 	
 	/* add new user
@@ -231,5 +234,4 @@ public class User implements Utility<User>{
 		   System.out.println("VendorError: " + ex.getErrorCode());
 		}
 	}		
-	
 }
