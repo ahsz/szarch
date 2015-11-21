@@ -11,7 +11,6 @@ public class Manuf_scope implements Utility<Manuf_scope> {
 	private java.lang.Integer is_ordered;
 	private String deadline;
 	
-	
 	public java.lang.Integer get_id() { return id; }
 	public String get_ms_id() { return ms_id; }
 	public java.lang.Integer get_is_ordered() { return is_ordered; }	
@@ -22,15 +21,13 @@ public class Manuf_scope implements Utility<Manuf_scope> {
 	public void set_is_ordered(java.lang.Integer is_ordered) { this.is_ordered = is_ordered; }
 	public void set_deadline(String deadline) { this.deadline = deadline; }
 	
-
 	public Manuf_scope(){
-		id = null;
-		ms_id = null;
-		is_ordered = null;
-		deadline = null;
+		this.id = null;
+		this.ms_id = null;
+		this.is_ordered = null;
+		this.deadline = null;
 	}
 
-	
 	public String toString() {
 		return id + "\t" + ms_id + "\t" + is_ordered + "\t" + deadline;
 	}
