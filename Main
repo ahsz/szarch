@@ -11,7 +11,7 @@ public class Main {
 		Role role = new Role();
 		Manuf_scope manuf_scope = new Manuf_scope();
 		
-		/*
+		/**
 		 *  Clear DB
 		 */
 		user.delete(user);
@@ -19,7 +19,7 @@ public class Main {
 		manuf_scope.delete(manuf_scope);
 		
 		
-		/*
+		/**
 		 *  User class test
 		 */	
 		/*
@@ -60,7 +60,7 @@ public class Main {
 		*/
 		
 		
-		/*
+		/**
 		 *  Role class test
 		 */
 		/*
@@ -91,7 +91,7 @@ public class Main {
 		role.update(role);
 		*/
 		
-		/*
+		/**
 		 *  Manuf_scope class test
 		 */
 		/*
@@ -124,12 +124,11 @@ public class Main {
 		manuf_scope.update(manuf_scope);
 		*/
 		
-		/*
+		/**
 		 *  Clear DB
 		 */
 		user.delete(user);
 		role.delete(role);
-		manuf_scope.delete(manuf_scope);
-		
+		manuf_scope.delete(manuf_scope);	
 	}
 }
