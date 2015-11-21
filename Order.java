@@ -32,7 +32,7 @@ public class Order implements Utility<Order> {
 	 * Add a new order to the database. 
 	 *
 	 * @param  Order the order what is will be added to the database
-	 * @return        1 - added, 0 - error
+	 * @return int   1 - added, else - error
 	 */
 	@Override
 	public int add(Order order) {
@@ -40,7 +40,7 @@ public class Order implements Utility<Order> {
 		int order_id = 0;
 		
 		if (order.get_manuf_scope_id() == null || order.get_product_id() == null || order.get_number() == null){
-			System.out.print("manuf_scope_id or is_ordered or deadline is null!");
+			System.out.print("manuf_scope_id or is_ordered or number is null!");
 			return order_id;
 		}
 		
@@ -135,8 +135,6 @@ public class Order implements Utility<Order> {
 	@Override
 	public void delete(Order order) {
 
-		List<Order> ord_list = new ArrayList<Order>();
-
 		try {	
 			String query = "DELETE FROM orders";
 			if (order.get_manuf_scope_id() != null || order.get_product_id() != null || order.get_number() != null)	
@@ -168,7 +166,6 @@ public class Order implements Utility<Order> {
 		   System.out.println("VendorError: " + ex.getErrorCode());
 		}
 		return;
-		
 	}
 
 	/**
@@ -179,8 +176,8 @@ public class Order implements Utility<Order> {
 	 */
 	@Override
 	public void update(Order order) {
-		if (order.get_manuf_scope_id() == null && order.get_product_id() == null){
-			System.out.print("both manuf_scope_id and product_id is null!");
+		if (order.get_manuf_scope_id() == null || order.get_product_id() == null){
+			System.out.print("manuf_scope_id and/or product_id is null!");
 			return;
 		}
 		if (order.get_number() == null){
@@ -193,6 +190,7 @@ public class Order implements Utility<Order> {
 			
 			java.sql.PreparedStatement stmt = conn.prepareStatement(query);
 			
+		
 			stmt.setInt(1, order.get_number());
 			stmt.setInt(2, order.get_manuf_scope_id());
 			stmt.setInt(3, order.get_product_id());
