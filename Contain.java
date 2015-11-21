@@ -11,13 +11,13 @@ public class Contain implements Utility<Contain> {
 	private java.lang.Integer number;
 
 	
-	public java.lang.Integer get_product_id() { return product_id; }
+	public java.lang.Integer get_product_id() 	{ return product_id; }
 	public java.lang.Integer get_component_id() { return component_id; } 
-	public java.lang.Integer get_number() { return number; }
+	public java.lang.Integer get_number() 		{ return number; }
 	
-	public void set_product_id(java.lang.Integer product_id) { this.product_id = product_id; }
-	public void set_component_id(java.lang.Integer component_id) { this.component_id = component_id; }
-	public void set_number(java.lang.Integer number) { this.number = number; }
+	public void set_product_id(java.lang.Integer product_id) 		{ this.product_id = product_id; }
+	public void set_component_id(java.lang.Integer component_id) 	{ this.component_id = component_id; }
+	public void set_number(java.lang.Integer number) 				{ this.number = number; }
 	
 	public Contain(){
 		this.product_id = null;
@@ -63,7 +63,7 @@ public class Contain implements Utility<Contain> {
 			stmt.setInt(2, contain.get_component_id());
 			ResultSet r = stmt.executeQuery();
 			r.next();
-			if (r.getInt("product_id") == contain.get_product_id() && r.getInt("component_id") == contain.get_component_id())
+			if (r.getInt("product_id") == contain.get_product_id() && r.getInt("component_id") == contain.get_component_id() && r.getInt("number") == contain.get_number())
 				contain_id = 1;
 			
 		} catch (SQLException ex) {
@@ -169,7 +169,7 @@ public class Contain implements Utility<Contain> {
 	}
 	
 	/**
-	 * Update one contain in the database.
+	 * Update one contain in the database, search by its product_id and component_id.
 	 *
 	 * @param  Contain the contain what will be updated
 	 * @return void
