@@ -13,7 +13,9 @@ public class Main {
 		Order order = new Order();
 		Product product = new Product();
 		Contain contain = new Contain();
+		Complex complex = new Complex();
 		Component component = new Component();
+
 		
 		/**
 		 *  Clear DB
@@ -24,7 +26,9 @@ public class Main {
 		order.delete(order);
 		manuf_scope.delete(manuf_scope);
 		product.delete(product);
+		complex.delete(complex);
 		component.delete(component);
+
 		
 		
 		/**
@@ -327,17 +331,83 @@ public class Main {
 		component.delete(component);
 		*/
 		
+		
+		/**
+		 *  Complex class test
+		 */	
+		/*
+		component.set_name("chair");
+		component.set_is_complex(1);
+		component.set_purch_time(5);
+		component.set_price(50);
+		component.add(component);
+		
+		component.set_name("chair leg");
+		component.set_is_complex(0);
+		component.set_purch_time(1);
+		component.set_price(10);
+		component.add(component);
+		
+		component.set_name("bed");
+		component.set_is_complex(1);
+		component.set_purch_time(10);
+		component.set_price(100);
+		component.add(component);
+		
+		component.set_name("bed leg");
+		component.set_is_complex(0);
+		component.set_purch_time(2);
+		component.set_price(20);
+		component.add(component);
+		
+		component = new Component();
+		complex.set_cmpnt_container_id(component.get(component).get(0).get_id());
+		complex.set_cmpnt_contained_id(component.get(component).get(1).get_id());
+		complex.set_number(4);
+		complex.add(complex);
+		
+		component = new Component();
+		complex.set_cmpnt_container_id(component.get(component).get(2).get_id());
+		complex.set_cmpnt_contained_id(component.get(component).get(3).get_id());
+		complex.set_number(4);
+		complex.add(complex);
+		
+		complex = new Complex();
+		System.out.println(complex.get(complex).get(0));
+
+		
+		complex.set_cmpnt_container_id(component.get(component).get(2).get_id());
+		complex.set_cmpnt_contained_id(component.get(component).get(3).get_id());
+		complex.delete(complex);
+				
+		complex.set_cmpnt_container_id(component.get(component).get(0).get_id());
+		complex.set_cmpnt_contained_id(component.get(component).get(1).get_id());
+		complex.set_number(10);
+
+		
+		complex.update(complex);
+		
+		complex = new Complex();
+		System.out.println(complex.get(complex).get(0));
+
+		complex = new Complex();
+		component = new Component();
+		complex.delete(complex);
+		component.delete(component);
+		*/
+		
 		/**
 		 *  Clear DB
 		 */
-		/*
-		User user = new User();
-		Role role = new Role();
-		Manuf_scope manuf_scope = new Manuf_scope();
-		Order order = new Order();
-		Product product = new Product();
-		Contain contain = new Contain();
-		Component component = new Component();
+		
+		user = new User();
+		role = new Role();
+		manuf_scope = new Manuf_scope();
+		order = new Order();
+		product = new Product();
+		contain = new Contain();
+		component = new Component();
+		complex = new Complex();
 	
 		user.delete(user);
 		role.delete(role);
@@ -346,7 +416,8 @@ public class Main {
 		manuf_scope.delete(manuf_scope);
 		product.delete(product);
 		component.delete(component);
+		complex.delete(complex);
 		
-		*/
+		
 	}
 }
