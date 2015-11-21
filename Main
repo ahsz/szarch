@@ -7,14 +7,22 @@ public class Main {
 
 	public static void main(String[] args) {
 
+		User user = new User();
+		Role role = new Role();
+		Manuf_scope manuf_scope = new Manuf_scope();
+		
+		/*
+		 *  Clear DB
+		 */
+		user.delete(user);
+		role.delete(role);
+		manuf_scope.delete(manuf_scope);
+		
 		
 		/*
 		 *  User class test
-		 */
-		
+		 */	
 		/*
-		User user = new User();
-		
 		user.set_name("Andras");
 		user.set_pw("akarmi");
 		user.set_role_id(1);
@@ -34,7 +42,7 @@ public class Main {
 		
 		usr_list = user.get(user);
 		
-		System.out.print(usr_list.get(0).get_id() + "\t" + usr_list.get(0).get_name() + "\t" + usr_list.get(0).get_pw() + "\t" + usr_list.get(0).get_role_id());
+		System.out.println(usr_list.get(0));
 		
 		user.set_id(null);
 		user.set_name("Keremi");
@@ -51,12 +59,11 @@ public class Main {
 		user.update(user);
 		*/
 		
+		
 		/*
 		 *  Role class test
 		 */
 		/*
-		Role role = new Role();
-		
 		role.set_name("master");
 		role.add(role);
 		
@@ -71,7 +78,7 @@ public class Main {
 		
 		rol_list = role.get(role);
 		
-		System.out.print(rol_list.get(0).get_id() + "\t" + rol_list.get(0).get_name());
+		System.out.println(rol_list.get(0));
 		
 		role.set_id(null);
 		role.set_name("slave");
@@ -83,6 +90,46 @@ public class Main {
 	
 		role.update(role);
 		*/
-	}
+		
+		/*
+		 *  Manuf_scope class test
+		 */
+		/*
+		manuf_scope.set_ms_id("manuf_scope1");
+		manuf_scope.set_is_ordered(0);
+		manuf_scope.set_deadline("20151201");
+		manuf_scope.add(manuf_scope);
+		
+		manuf_scope.set_ms_id("manuf_scope2");
+		manuf_scope.set_is_ordered(1);
+		manuf_scope.set_deadline("20141201");
+		manuf_scope.add(manuf_scope);
+	
+		List<Manuf_scope> msc_list = new ArrayList<Manuf_scope>();
+		
+		msc_list = manuf_scope.get(manuf_scope);
+		
+		System.out.println(msc_list.get(0));
+		
+		manuf_scope.set_id(null);
+		manuf_scope.set_deadline("20141201");
 
+		manuf_scope.delete(manuf_scope);
+		
+		manuf_scope.set_id(null);
+		manuf_scope.set_ms_id("manuf_scope1");
+		manuf_scope.set_is_ordered(null);
+		manuf_scope.set_deadline("20160101");
+	
+		manuf_scope.update(manuf_scope);
+		*/
+		
+		/*
+		 *  Clear DB
+		 */
+		user.delete(user);
+		role.delete(role);
+		manuf_scope.delete(manuf_scope);
+		
+	}
 }
