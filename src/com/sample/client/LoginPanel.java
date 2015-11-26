@@ -8,6 +8,7 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.io.IOException;
 import java.net.URISyntaxException;
+import java.util.ArrayList;
 import java.util.Hashtable;
 import java.util.List;
 
@@ -126,8 +127,10 @@ public class LoginPanel extends JPanel {
 
 		final UserService ejb = lookupRemoteEJB();
 
-		List<User> bela=  (List<User>)ejb.getUser();
-		bela.get(0);
+		ArrayList<UserLocal> bela=  (ArrayList<UserLocal>)ejb.getUser();
+		String jozsi=bela.get(0).geXtName();
+		//UserLocal valaki= bela.get(0);
+
 		System.out.println(bela);
 	}
 

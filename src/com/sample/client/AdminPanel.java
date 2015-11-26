@@ -1,5 +1,7 @@
 package com.sample.client;
-
+/*
+ * Admin felület
+ */
 import java.awt.Dimension;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
@@ -27,12 +29,15 @@ import javax.swing.JLabel;
 import javax.swing.plaf.DimensionUIResource;
 import javax.swing.SwingConstants;
 
-public class SearchPanel extends JPanel {
+public class AdminPanel extends JPanel {
 
 	/**
 	 * Create the panel.
 	 */
-	public SearchPanel() {
+	public AdminPanel() {
+		
+		JLabel lblAdminFelulet = new JLabel("Admin felulet");
+		this.add(lblAdminFelulet);
 	}
 	
 

@@ -1,5 +1,9 @@
 package com.sample.client;
 
+/*
+ * Gyártási célok kezelése
+ */
+
 import java.awt.Dimension;
 import java.awt.image.BufferedImage;
 import java.io.File;
@@ -24,12 +28,15 @@ import java.awt.event.ActionEvent;
 import javax.swing.JLabel;
 import javax.swing.SwingConstants;
 
-public class BrowsePanel extends JPanel {
+public class ManufactureScopeNewPanel extends JPanel {
 
 	/**
 	 * Create the panel.
 	 */
-	public BrowsePanel() {
+	public ManufactureScopeNewPanel() {
+		
+		JLabel lblGyartasiCelokKezelese = new JLabel("Gyartasi Celok kezelese");
+		this.add(lblGyartasiCelokKezelese);
 
 		
 	}

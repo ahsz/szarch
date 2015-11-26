@@ -23,14 +23,25 @@ public class MainWindow {
 
 	private JFrame initialWindow;
 	private LoginPanel startPanel= null;
-	private BrowsePanel browsePanel;
-	private UploadPanel uploadPanel = new UploadPanel();
-	private SearchPanel searchPanel;
-	//public static Utility ut;
-	private static int TYPE_BROWSE = 1;
-	private static int TYPE_SEARCH = 2;
+	private ManufactureScopeNewPanel manufactureScopeNewPanel;
+	private AdminPanel adminPanel;
 	
-
+	private ProductBrowsePanel  productBrowsePanel;
+	private ProductModifyPanel  productModifyPanel;
+	private ComponentComplexPanel componentComplexPanel;
+	
+	private ComponentPanel  componentPanel;
+	private ManufactureScopeBrowsePanel mnufactureScopeBrowsePanel;
+	
+	//public static Utility ut;
+	private static int TYPE_MANUF_NEW = 1;
+	private static int TYPE_ADMIN = 2;
+	private static int TYPE_PRODUCT_BROWSE = 3;
+	private static int TYPE_PRODUCT_MODIFY = 4;
+	private static int TYPE_COMPONENT_COMPLEX = 5;
+	private static int TYPE_COMPONENT = 6;
+	private static int TYPE_MANUF_BROWSE= 7;
+	
 	//static { ut = new Utility(); }//
 	
 	/**
@@ -85,18 +96,56 @@ public class MainWindow {
 		JMenu menuFile = new JMenu("F\u00E1jl");
 		menuBar.add(menuFile);
 		
-		JMenuItem menuItemBrowseImages = new JMenuItem("K\u00E9pek b\u00F6ng\u00E9sz\u00E9se");
-		menuFile.add(menuItemBrowseImages);
-	    menuItemBrowseImages.addActionListener(new MenuAction(startPanel, browsePanel, TYPE_BROWSE));
+		
+		/*
+		private static int TYPE_MANUF_NEW = 1;
+		private static int TYPE_ADMIN = 2;
+		private static int TYPE_PRODUCT_BROWSE = 3;
+		private static int TYPE_PRODUCT_MODIFY = 4;
+		private static int TYPE_COMPONENT_COMPLEX = 5;
+		private static int TYPE_COMPONENT = 6;
+		private static int TYPE_MANUF_BROWSE= 7;*/
+		
+		//Manager---------------------------------------------------------------------------------------------
+		JMenuItem menuItemManufactureScopeNew = new JMenuItem("Gyartasi celok kezelese");
+		menuFile.add(menuItemManufactureScopeNew);
+		menuItemManufactureScopeNew.addActionListener(new MenuAction(startPanel, manufactureScopeNewPanel, TYPE_MANUF_NEW));
 
 				
-		JMenuItem menuItemUploadImages = new JMenuItem("K\u00E9pek felt\u00F6lt\u00E9se");
-		menuFile.add(menuItemUploadImages);
-		menuItemUploadImages.addActionListener(new MenuAction(startPanel, uploadPanel, 0));
+		JMenuItem menuItemAdmin = new JMenuItem("Admin felulet");
+		menuFile.add(menuItemAdmin);
+		menuItemAdmin.addActionListener(new MenuAction(startPanel, adminPanel, TYPE_ADMIN));
 		
-		JMenuItem menuItemSearch = new JMenuItem("Keres\u00E9s");
+		//Gyartasvezeto---------------------------------------------------------------------------------------------
+		JMenuItem menuItemProductBrowse = new JMenuItem("Kesztermek megtekintese");
+		menuFile.add(menuItemProductBrowse);
+		menuItemProductBrowse.addActionListener(new MenuAction(startPanel, productBrowsePanel, TYPE_PRODUCT_BROWSE));
+
+				
+		JMenuItem menuItemProductModify = new JMenuItem("Kesztermek kezelese");
+		menuFile.add(menuItemProductModify);
+		menuItemProductModify.addActionListener(new MenuAction(startPanel, productModifyPanel, TYPE_PRODUCT_MODIFY));
+		
+		JMenuItem menuItemComponentComplex = new JMenuItem("Komplex alkatresz kezelese");
+		menuFile.add(menuItemComponentComplex);
+		menuItemComponentComplex.addActionListener(new MenuAction(startPanel, componentComplexPanel, TYPE_COMPONENT_COMPLEX));
+		
+		
+		//Beszerzo---------------------------------------------------------------------------------------------
+		JMenuItem menuItemComponent = new JMenuItem("Alkatreszek kezelese");
+		menuFile.add(menuItemComponent);
+		menuItemComponent.addActionListener(new MenuAction(startPanel, componentPanel, TYPE_COMPONENT));
+
+				
+		JMenuItem menuItemManufactureScopeBrowse = new JMenuItem("Beszerzesi lista");
+		menuFile.add(menuItemManufactureScopeBrowse);
+		menuItemManufactureScopeBrowse.addActionListener(new MenuAction(startPanel, mnufactureScopeBrowsePanel, TYPE_MANUF_BROWSE));
+		
+
+		JMenuItem menuItemSearch = new JMenuItem("Kilepes");
 		menuFile.add(menuItemSearch);
-		menuItemSearch.addActionListener(new MenuAction(startPanel, searchPanel, TYPE_SEARCH));
+		menuItemSearch.addActionListener(new MenuAction(startPanel, adminPanel, TYPE_ADMIN));
+		
 		
 	}
 	private static void addPopup(Component component, final JPopupMenu popup) {
@@ -133,14 +182,45 @@ public class MainWindow {
 	    }
 	    
 	    private void changePanel(JPanel oldPanel, JPanel panel, int type) {
-	    	if(type == TYPE_BROWSE){
-		    	browsePanel = new BrowsePanel();
-		    	newPanel = browsePanel;
+	    	if(type == TYPE_MANUF_NEW){
+		    	manufactureScopeNewPanel = new ManufactureScopeNewPanel();
+		    	newPanel = manufactureScopeNewPanel;
 	    	}
-		    if(type == TYPE_SEARCH){
-		    	searchPanel = new SearchPanel();
-		    	newPanel = searchPanel;
+		    if(type == TYPE_ADMIN){
+		    	adminPanel = new AdminPanel();
+		    	newPanel = adminPanel;
 		    }
+	    	if(type == TYPE_PRODUCT_BROWSE){
+	    		productBrowsePanel = new ProductBrowsePanel();
+		    	newPanel = productBrowsePanel;
+	    	}
+		    if(type == TYPE_PRODUCT_MODIFY){
+		    	productModifyPanel = new ProductModifyPanel();
+		    	newPanel = productModifyPanel;
+		    }
+	    	if(type == TYPE_COMPONENT_COMPLEX){
+	    		componentComplexPanel = new ComponentComplexPanel();
+		    	newPanel = componentComplexPanel;
+	    	}
+		    if(type == TYPE_COMPONENT){
+		    	componentPanel = new ComponentPanel();
+		    	newPanel = componentPanel;
+		    }
+		    if(type == TYPE_MANUF_BROWSE){
+		    	mnufactureScopeBrowsePanel = new ManufactureScopeBrowsePanel();
+		    	newPanel = mnufactureScopeBrowsePanel;
+		    }
+		    /*
+	private ManufactureScopeNewPanel manufactureScopeNewPanel;
+	private AdminPanel adminPanel;
+	
+	private ProductBrowsePanel  productBrowsePanel;
+	private ProductModifyPanel  productModifyPanel;
+	private ComponentComplexPanel componentComplexPanel;
+	
+	private ComponentPanel  componentPanel;
+	private ManufactureScopeBrowsePanel mnufactureScopeBrowsePanel;
+			*/
 	    	oldPanel.removeAll();
 		    oldPanel.add(newPanel);
 		    oldPanel.revalidate();
