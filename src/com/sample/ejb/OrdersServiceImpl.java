@@ -52,9 +52,9 @@ public class OrdersServiceImpl implements OrdersService, Serializable {
 	@Override
 	public String echo(String s) {
 	    return "Orders_44 "+s;
-		
 	}
-
+	
+	@SuppressWarnings("unchecked")
 	@Override
 	public List<Orders> getOrders(Orders orders) {
 

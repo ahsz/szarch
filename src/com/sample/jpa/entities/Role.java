@@ -22,10 +22,7 @@ import com.sample.ejb.UserService;
 @Table(
 		name = "role",
 		uniqueConstraints=@UniqueConstraint(columnNames={"name"})		
-)
-
-@Stateless
-@Remote(UserService.class) 		
+)	
 public class Role implements Serializable{
 
 	 private static final long serialVersionUID = 1L;

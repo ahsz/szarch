@@ -2,6 +2,8 @@ package com.sample.ejb;
 
 import java.util.List;
 
+import javax.ejb.Remote;
+import javax.ejb.Stateless;
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
 import javax.persistence.PersistenceException;
@@ -12,6 +14,8 @@ import javax.validation.ConstraintViolationException;
 import com.sample.jpa.entities.Role;
 import com.sample.jpa.entities.User;
 
+@Stateless
+@Remote(UserService.class) 	
 public class RoleServiceImpl implements RoleService {
 
 	private static final long serialVersionUID = 1L;
@@ -44,9 +48,7 @@ public class RoleServiceImpl implements RoleService {
 
 	@Override
 	public String echo(String s) {
-		
 		return "Role_44 "+s;
-	
 	}
 	
 	@SuppressWarnings("unchecked")
@@ -87,7 +89,6 @@ public class RoleServiceImpl implements RoleService {
 	public int remRole(Role role) {
 		if (role.getId() == null || role.getName() == null)
 			return -1;
-
 
 		try {	
 			em.remove(em.contains(role) ? role : em.merge(role));

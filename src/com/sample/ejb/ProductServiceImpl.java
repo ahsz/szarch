@@ -1,5 +1,6 @@
 package com.sample.ejb;
 
+import java.io.Serializable;
 import java.util.List;
 
 import javax.ejb.Remote;
@@ -11,30 +12,25 @@ import javax.persistence.TransactionRequiredException;
 import javax.persistence.TypedQuery;
 import javax.validation.ConstraintViolationException;
 
-import com.sample.jpa.entities.Manuf_scope;
-import com.sample.jpa.entities.User;
+import com.sample.jpa.entities.Product;
+import com.sample.jpa.entities.Role;
 
 @Stateless
-@Remote(UserService.class) 	
-public class Manuf_scopeServiceImpl implements Manuf_scopeService {
+@Remote(UserService.class) 
+public class ProductServiceImpl implements ProductService, Serializable {
 	
-	
-	/**
-	 * 
-	 */
 	private static final long serialVersionUID = 1L;
 	
 	@PersistenceContext(name = "Anyagbeszer")
 	private EntityManager em;
+	
 	@Override
-	
-	
-	public int addManuf_scope(Manuf_scope manuf_scope) {
-		if ((manuf_scope.getMs_id() == null || manuf_scope.getIs_ordered() == null || manuf_scope.getDeadline() == null) ||  manuf_scope.getId() != null)
+	public int addProduct(Product product) {
+		if (product.getName() == null ||  product.getId() != null)
 			return -1;
 		
 		try {
-			em.persist(manuf_scope);
+			em.persist(product);
 		} catch (ConstraintViolationException e) {
 			return -2;
 		} catch (IllegalArgumentException e) {
@@ -45,36 +41,36 @@ public class Manuf_scopeServiceImpl implements Manuf_scopeService {
 			return -5;
 		}
 			
-		if (em.find(Manuf_scope.class, manuf_scope.getId()).getMs_id() == manuf_scope.getMs_id())
-			return em.find(Manuf_scope.class, manuf_scope.getId()).getId();
+		if (em.find(Product.class, product.getId()).getName() == product.getName())
+			return em.find(Product.class, product.getId()).getId();
 		
 		return 0;
 	}
 
 	@Override
 	public String echo(String s) {
-        return "Manuf_scope_44 "+s;
+		return "Product_44 "+s;
 	}
-
+	
 	@SuppressWarnings("unchecked")
 	@Override
-	public List<Manuf_scope> getManuf_scope(Manuf_scope manuf_scope) {
+	public List<Product> getProduct(Product product) {
 
 		@SuppressWarnings("unchecked")
-		TypedQuery<Manuf_scope> query = em.createQuery("from Manuf_scope", Manuf_scope.class);
-		List<Manuf_scope> mfs_list = query.getResultList();
+		TypedQuery<Product> query = em.createQuery("from Product", Product.class);
+		List<Product> prd_list = query.getResultList();
 		
-		return mfs_list;
+		return prd_list;	
 	}
 
 	@Override
-	public int updManuf_scope(Manuf_scope manuf_scope) {
+	public int updProduct(Product product) {
 
-		if ((manuf_scope.getMs_id() == null && manuf_scope.getIs_ordered() == null && manuf_scope.getDeadline() == null) || manuf_scope.getId() == null )
+		if (product.getName() == null || product.getId() == null )
 			return -1;
 		
 		try {
-			em.merge(manuf_scope);
+			em.merge(product);
 		} catch (ConstraintViolationException e) {
 			return -2;
 		} catch (IllegalArgumentException e) {
@@ -84,20 +80,19 @@ public class Manuf_scopeServiceImpl implements Manuf_scopeService {
 		} catch (PersistenceException e) {
 			return -5;
 		}
-		if (em.find(Manuf_scope.class, manuf_scope.getId()).getMs_id() == manuf_scope.getMs_id())
-			return em.find(Manuf_scope.class, manuf_scope.getId()).getId();
+		if (em.find(Product.class, product.getId()).getName() == product.getName())
+			return em.find(Product.class, product.getId()).getId();
 		
 		return 0;
 	}
 
 	@Override
-	public int remManuf_scope(Manuf_scope manuf_scope) {
-		if (manuf_scope.getId() == null || manuf_scope.getMs_id() == null || manuf_scope.getIs_ordered() == null || manuf_scope.getDeadline() == null )
+	public int remProduct(Product product) {
+		if (product.getId() == null || product.getName() == null)
 			return -1;
 
-
 		try {	
-			em.remove(em.contains(manuf_scope) ? manuf_scope : em.merge(manuf_scope));
+			em.remove(em.contains(product) ? product : em.merge(product));
 		} catch (ConstraintViolationException e) {
 			return -2;
 		} catch (IllegalArgumentException e) {
@@ -108,7 +103,7 @@ public class Manuf_scopeServiceImpl implements Manuf_scopeService {
 			return -5;
 		}
 
-		if (em.contains(manuf_scope))
+		if (em.contains(product))
 			return 0;
 		else
 			return 1;

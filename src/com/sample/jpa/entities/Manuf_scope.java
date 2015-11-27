@@ -18,9 +18,6 @@ import com.sample.ejb.UserService;
 		name = "manuf_scope",
 		uniqueConstraints=@UniqueConstraint(columnNames={"ms_id"})
 )
-
-@Stateless
-@Remote(UserService.class) 
 public class Manuf_scope implements Serializable {
 
 	 private static final long serialVersionUID = 1L;
