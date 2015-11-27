@@ -123,7 +123,7 @@ public class LoginPanel extends JPanel {
         
 		User user = new User();
 	
-		user.setName("andraskaaaaaaa");
+		user.setName("andraskaaaaaaaa");
 		user.setPassword("password");
 		user.setRole_id(1);
 
@@ -186,13 +186,13 @@ public class LoginPanel extends JPanel {
 
 	private static void testRemoteEJB() throws NamingException {
 
-		final UserService ejb = lookupRemoteEJB();
+		//final UserService ejb = lookupRemoteEJB();
 
-		ArrayList<UserLocal> bela=  (ArrayList<UserLocal>)ejb.getUser();
-		String jozsi=bela.get(0).geXtName();
+		//ArrayList<UserLocal> bela=  (ArrayList<UserLocal>)ejb.getUser();
+		//String jozsi=bela.get(0).geXtName();
 		//UserLocal valaki= bela.get(0);
 
-		System.out.println(bela);
+		//System.out.println(bela);
 	}
 
 	private static UserService lookupRemoteEJB() throws NamingException {
