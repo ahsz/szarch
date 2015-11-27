@@ -113,11 +113,70 @@ public class LoginPanel extends JPanel {
 	
 	private static void testRemoteEJB2() throws NamingException {
 
+
 		final UserService ejb = lookupRemoteEJB();
         String s = ejb.echo("Frank"); 
+        System.out.println(s);
+        
+        
+        // Add new user
+        
+		User user = new User();
+	
+		user.setName("andraskaaaaaaa");
+		user.setPassword("password");
+		user.setRole_id(1);
 
-		 
-		System.out.println(s);
+		int i = ejb.addUser(user);
+		System.out.println(i);
+		
+        
+        // List users
+        /*
+        User user = new User();
+    
+		List<User> usr_list = ejb.getUser(user);
+
+		for (int i = 0; i < usr_list.size(); i++){
+			System.out.println(usr_list.get(i));
+		}
+		*/
+        
+        // Update user
+        /*
+		User user = new User();
+		
+		user.setId(2);
+		user.setName("andras_updated");
+		user.setPassword("password_updated");
+		user.setRole_id(1);
+		
+		int i  = ejb.updUser(user);
+		System.out.println(i);
+		*/
+        
+        // Delete user
+        
+        /*
+        User user = new User();
+       
+		user.setId(5);
+		user.setName("andraska");
+		user.setPassword("password");
+		user.setRole_id(1);
+		int i  = ejb.remUser(user);
+		System.out.println(i);
+		*/
+	
+        // Add new role
+        /*
+		Role role = new Role();
+	
+		role.setName("boss");
+
+		int i = role_ejb.addRole(role);
+		System.out.println(i);
+		*/
 	}
 
 	
