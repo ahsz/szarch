@@ -16,11 +16,11 @@ import javax.persistence.UniqueConstraint;
 
 @Entity
 @Table(
-		name = "user",
+		name = "role",
 		uniqueConstraints=@UniqueConstraint(columnNames={"name"})		
 )
 		
-public class User implements Serializable{
+public class Role implements Serializable{
 
 	 private static final long serialVersionUID = 1L;
 	 
@@ -32,32 +32,21 @@ public class User implements Serializable{
 	@Column(name = "name", unique = true, nullable = true)
 	private String name;
 
-	@Column(name = "password", nullable = true)
-	private String password;
-	
-	@Column(name = "role_id", nullable = true)
-	private java.lang.Integer  role_id;
-	
 	
 	public java.lang.Integer getId()			{ return id; }	
 	public String getName() 					{ return name; }
-	public String getPassword() 				{ return password; }
-	public java.lang.Integer getRole_id()		{ return role_id; }
 	
 	public void setId(java.lang.Integer new_id)				{ this.id = new_id; }
 	public void setName(String new_name) 					{ this.name = new_name; }
-	public void setPassword(String new_pw) 					{ this.password = new_pw; }
-	public void setRole_id(java.lang.Integer new_role_id) 	{ this.role_id = new_role_id; }
+
 	
-	public User() {
+	public Role() {
 		id = null;
 		name = null;
-		password = null;
-		role_id = null;
 	}
 	
 	public String toString() {
-		return id + "\t" + name + "\t" + password + "\t" + role_id;
+		return id + "\t" + name;
 	}
 
 }
