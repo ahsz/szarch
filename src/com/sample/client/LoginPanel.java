@@ -22,9 +22,11 @@ import javax.swing.JTextField;
 //import java.util.stream.Collectors;
 import javax.swing.SpringLayout;
 
-
+import com.sample.ejb.RoleService;
+import com.sample.ejb.RoleServiceImpl;
 import com.sample.ejb.UserService;
 import com.sample.ejb.UserServiceImpl;
+import com.sample.jpa.entities.Role;
 import com.sample.jpa.entities.User;
 
 public class LoginPanel extends JPanel {
@@ -115,12 +117,17 @@ public class LoginPanel extends JPanel {
 
 
 		final UserService ejb = lookupRemoteEJB();
-        String s = ejb.echo("Frank"); 
+		
+		final RoleService role_ejb = role_lookupRemoteEJB();
+		
+        String s = ejb.echo("Frank_user"); 
         System.out.println(s);
         
+		String ss = role_ejb.echo("Frank_role"); 
+        System.out.println(ss);
         
         // Add new user
-        
+        /*
 		User user = new User();
 	
 		user.setName("andraskaaaaaaaa");
@@ -129,7 +136,7 @@ public class LoginPanel extends JPanel {
 
 		int i = ejb.addUser(user);
 		System.out.println(i);
-		
+		*/
         
         // List users
         /*
@@ -169,14 +176,14 @@ public class LoginPanel extends JPanel {
 		*/
 	
         // Add new role
-        /*
+        
 		Role role = new Role();
 	
 		role.setName("boss");
 
 		int i = role_ejb.addRole(role);
 		System.out.println(i);
-		*/
+		
 	}
 
 	
@@ -215,4 +222,26 @@ public class LoginPanel extends JPanel {
 				"ejb:" + appName + "/" + moduleName + "/" + distinctName + "/" + beanName + "!" + viewClassName);
 
 	}
+	
+	private static RoleService role_lookupRemoteEJB() throws NamingException {
+		final Hashtable jndiProperties = new Hashtable();
+		jndiProperties.put(Context.URL_PKG_PREFIXES, "org.jboss.ejb.client.naming");
+
+		final Context context = new InitialContext(jndiProperties);
+
+		final String appName = "";
+		final String moduleName = "Anyagbeszer";
+		final String distinctName = "";
+		final String beanName = RoleServiceImpl.class.getSimpleName();
+
+		final String viewClassName = RoleService.class.getName();
+		System.out.println("Looking EJB via JNDI ");
+		System.out.println(
+				"ejb:" + appName + "/" + moduleName + "/" + distinctName + "/" + beanName + "!" + viewClassName);
+
+		return (RoleService) context.lookup(
+				"ejb:" + appName + "/" + moduleName + "/" + distinctName + "/" + beanName + "!" + viewClassName);
+
+	}
+	
 }
