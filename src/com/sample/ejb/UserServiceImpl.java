@@ -1,6 +1,7 @@
 package com.sample.ejb;
 
 import java.io.Serializable;
+import java.util.ArrayList;
 import java.util.List;
 
 import javax.ejb.Remote;
@@ -116,6 +117,40 @@ public class UserServiceImpl implements UserService, Serializable {
 			return 0;
 		else
 			return 1;
+	}
+	
+	@Override
+	public String[] getAllUserNames(){
+		User user=new User();
+		
+		
+		List<User> usr_list=new ArrayList<User>();
+		usr_list= getUser(user);
+		
+		String[] userNames= new String[usr_list.size()];
+		for(int i=0;i<usr_list.size();i++){
+			userNames[i]=usr_list.get(i).getName();
+		}
+		
+		
+		
+		return userNames;
+		
+	}
+	@Override
+	public User getUser(int Id){
+		User user=new User();
+		List<User> usr_list=new ArrayList<User>();
+		usr_list= getUser(user);
+		
+		String[] userNames= new String[usr_list.size()];
+		for(int i=0;i<usr_list.size();i++){
+			if(usr_list.get(i).getId()==Id)
+				user=usr_list.get(i);
+		}
+		
+		
+		return user;
 	}
 	
 }

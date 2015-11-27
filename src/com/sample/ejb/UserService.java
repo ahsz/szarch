@@ -13,4 +13,7 @@ public interface UserService {
 	public List<User> getUser(User user);
 	public int updUser(User user);
 	public int remUser(User user);
+	public String[] getAllUserNames();
+	public User getUser(int Id);
+
 }

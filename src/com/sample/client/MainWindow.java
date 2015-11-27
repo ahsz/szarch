@@ -11,6 +11,7 @@ import java.awt.event.MouseEvent;
 import java.util.ArrayList;
 import java.util.List;
 
+import javax.naming.NamingException;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.JMenu;
@@ -185,7 +186,12 @@ public class MainWindow {
 		    	newPanel = manufactureScopeHandlePanel;
 	    	}
 		    if(type == TYPE_ADMIN){
-		    	adminPanel = new AdminPanel();
+		    	try {
+					adminPanel = new AdminPanel();
+				} catch (NamingException e) {
+					// TODO Auto-generated catch block
+					e.printStackTrace();
+				}
 		    	newPanel = adminPanel;
 		    }
 	    	if(type == TYPE_PRODUCT_BROWSE){
