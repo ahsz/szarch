@@ -127,48 +127,6 @@ public class LoginPanel extends JPanel {
 	}
 	
 	
-	
-	/*
-	private static void testRemoteEJB2() throws NamingException {
-
-
-		final UserService ejb = lookupRemoteEJB();
-		
-		final RoleService role_ejb = role_lookupRemoteEJB();
-		
-        String s = ejb.echo("Frank_user"); 
-        System.out.println(s);
-        
-		String ss = role_ejb.echo("Frank_role"); 
-        System.out.println(ss);
-      
-        // Add new role
-        
-		Role role = new Role();
-	
-		role.setName("boss");
-
-		int i = role_ejb.addRole(role);
-		System.out.println(i);
-		
-	}*/
-
-	
-	
-
-
-
-	private static void testRemoteEJB() throws NamingException {
-
-		//final UserService ejb = lookupRemoteEJB();
-
-		//ArrayList<UserLocal> bela=  (ArrayList<UserLocal>)ejb.getUser();
-		//String jozsi=bela.get(0).geXtName();
-		//UserLocal valaki= bela.get(0);
-
-		//System.out.println(bela);
-	}
-
 	private static UserService lookupRemoteEJB() throws NamingException {
 		final Hashtable jndiProperties = new Hashtable();
 		jndiProperties.put(Context.URL_PKG_PREFIXES, "org.jboss.ejb.client.naming");
@@ -189,26 +147,6 @@ public class LoginPanel extends JPanel {
 				"ejb:" + appName + "/" + moduleName + "/" + distinctName + "/" + beanName + "!" + viewClassName);
 
 	}
-	/*
-	private static RoleService role_lookupRemoteEJB() throws NamingException {
-		final Hashtable jndiProperties = new Hashtable();
-		jndiProperties.put(Context.URL_PKG_PREFIXES, "org.jboss.ejb.client.naming");
 
-		final Context context = new InitialContext(jndiProperties);
-
-		final String appName = "";
-		final String moduleName = "Anyagbeszer";
-		final String distinctName = "";
-		final String beanName = RoleServiceImpl.class.getSimpleName();
-
-		final String viewClassName = RoleService.class.getName();
-		System.out.println("Looking EJB via JNDI ");
-		System.out.println(
-				"ejb:" + appName + "/" + moduleName + "/" + distinctName + "/" + beanName + "!" + viewClassName);
-
-		return (RoleService) context.lookup(
-				"ejb:" + appName + "/" + moduleName + "/" + distinctName + "/" + beanName + "!" + viewClassName);
-
-	}*/
 	
 }

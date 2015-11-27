@@ -208,7 +208,12 @@ public class MainWindow {
 		    	newPanel = componentComplexPanel;
 	    	}
 		    if(type == TYPE_COMPONENT){
-		    	componentPanel = new ComponentPanel();
+		    	try {
+					componentPanel = new ComponentPanel();
+				} catch (NamingException e) {
+					// TODO Auto-generated catch block
+					e.printStackTrace();
+				}
 		    	newPanel = componentPanel;
 		    }
 		    if(type == TYPE_MANUF_BROWSE){

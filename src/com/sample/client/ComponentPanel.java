@@ -1,11 +1,18 @@
 package com.sample.client;
 /*
- * Komplex alkatrészek kezelése
+ *  alkatrészek kezelése
  */
 
 import javax.swing.JPanel;
 import javax.swing.JScrollPane;
 import javax.swing.JTextField;
+
+import com.sample.jpa.entities.Component;
+import com.sample.ejb.ComponentService;
+import com.sample.ejb.ComponentServiceImpl;
+import com.sample.ejb.UserService;
+import com.sample.ejb.UserServiceImpl;
+import com.sample.jpa.entities.Component;
 
 import net.miginfocom.swing.MigLayout;
 
@@ -14,7 +21,11 @@ import java.awt.Color;
 import java.awt.GridLayout;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.util.Hashtable;
 
+import javax.naming.Context;
+import javax.naming.InitialContext;
+import javax.naming.NamingException;
 import javax.swing.JButton;
 import javax.swing.JComboBox;
 import javax.swing.JLabel;
@@ -31,7 +42,7 @@ public class ComponentPanel extends JPanel {
 	private final JComboBox comboBoxFunctionSwitcher1 = new JComboBox(modeString);
 	private final JComboBox comboBoxFunctionSwitcher2 = new JComboBox(modeString);
 	private final JComboBox comboBoxFunctionSwitcher3 = new JComboBox(modeString);
-	private final JComboBox comboBoxElementSelector = new JComboBox();
+
 	
 	private final JTextField txtTermeknevFirst = new JTextField();
 	private final JButton btnFelvetelFirst = new JButton("Felvetel");
@@ -48,8 +59,8 @@ public class ComponentPanel extends JPanel {
 	private final JTextField txtIdotartamSecond = new JTextField();
 
 
-	public ComponentPanel() {
-
+	public ComponentPanel() throws NamingException {
+		final ComponentService ejb = lookupRemoteEJB();
 
 		txtIdotartamFirst.setText("Idotartam");
 		txtIdotartamFirst.setColumns(10);
@@ -96,11 +107,20 @@ public class ComponentPanel extends JPanel {
 		    //Mentesnel itt erhetoek el az adatok
 			btnFelvetelFirst.addActionListener(new ActionListener() {
 				public void actionPerformed(ActionEvent e) {
+					
+					Component component=new Component();
+					component.setName(txtTermeknevFirst.getText());
+					component.setIs_compex(0);
+					component.setPrice(Integer.parseInt(txtArFirst.getText()));
+					component.setPurch_time(Integer.parseInt(txtIdotartamFirst.getText()));
+					ejb.addComponent(component);
+					
 					//java.awt.Component[] comps= newElementsPanelFirst.getComponents();
-					String s="";
+
 				}
 			});
 		
+			JComboBox comboBoxElementSelector = new JComboBox(ejb.getAllComponentNames());
 		
 		comboBoxFunctionSwitcher1.addActionListener(new ActionListener() {
 			@Override
@@ -113,13 +133,20 @@ public class ComponentPanel extends JPanel {
 				if (jcb.getSelectedIndex() == 2)
 					comboBoxFunctionSwitcher3.setSelectedItem(modeString[2]);
 				cl.show(panelCont, Integer.toString(jcb.getSelectedIndex() + 1));
+				comboBoxElementSelector.removeAllItems();
+				
+			    for(String s:ejb.getAllComponentNames()){
+			    	comboBoxElementSelector.addItem(ejb.getAllComponentNames());
+			    }
+				
 			}
 		});
 
 		
 		//----------------------------MASODIK PANEL----------------------------------
 
-		
+
+
 		
 		panelSecond.setSize(1000,1000);
 		panelCont.add(panelSecond, "2");
@@ -138,6 +165,16 @@ public class ComponentPanel extends JPanel {
 		panelSecond.add(txtIdotartamSecond, "cell 0 4,growx");
 		
 		
+		comboBoxElementSelector.addActionListener(new ActionListener() {
+			@Override
+			public void actionPerformed(ActionEvent e) {
+				Component comp=ejb.getComponent(comboBoxElementSelector.getSelectedItem().toString());
+				txtTermeknevSecond.setText(comp.getName());
+				txtArSecond.setText(comp.getPrice().toString());
+				txtIdotartamSecond.setText(comp.getPurch_time().toString());
+			}
+		});
+		
 		/*
 		txtTermeknevSecond.setText("Alkatreszneve");
 		panelSecond.add(txtTermeknevSecond, "cell 0 2");
@@ -151,6 +188,12 @@ public class ComponentPanel extends JPanel {
 		    //Mentesnel itt erhetoek el az adatok
 			btnFelvetelSecond.addActionListener(new ActionListener() {
 				public void actionPerformed(ActionEvent e) {
+					Component comp=ejb.getComponent(comboBoxElementSelector.getSelectedItem().toString());
+					comp.setName(txtTermeknevSecond.getText());
+					comp.setName(txtTermeknevSecond.getText());
+					comp.setPrice(Integer.parseInt(txtArSecond.getText()));
+					comp.setPurch_time(Integer.parseInt(txtIdotartamSecond.getText()));
+					ejb.updComponent(comp);
 					//java.awt.Component[] compsSecond= newElementsPanelSecond.getComponents();
 					String s="";
 				}
@@ -197,6 +240,31 @@ public class ComponentPanel extends JPanel {
 			}
 		});
 
+	}
+	
+	private static ComponentService lookupRemoteEJB() throws NamingException {
+		final Hashtable jndiProperties = new Hashtable();
+		jndiProperties.put(Context.URL_PKG_PREFIXES, "org.jboss.ejb.client.naming");
+
+		final Context context = new InitialContext(jndiProperties);
+
+		final String appName = "";
+		final String moduleName = "Anyagbeszer";
+		final String distinctName = "";
+		final String beanName = ComponentServiceImpl.class.getSimpleName();
+
+		final String viewClassName = ComponentService.class.getName();
+		System.out.println("Looking EJB via JNDI ");
+		System.out.println(
+				"ejb:" + appName + "/" + moduleName + "/" + distinctName + "/" + beanName + "!" + viewClassName);
+
+		return (ComponentService) context.lookup(
+				"ejb:" + appName + "/" + moduleName + "/" + distinctName + "/" + beanName + "!" + viewClassName);
+
+	}
+	
+	public void refershCompNames(){
+		
 	}
 
 }

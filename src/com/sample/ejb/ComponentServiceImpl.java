@@ -1,6 +1,7 @@
 package com.sample.ejb;
 
 import java.io.Serializable;
+import java.util.ArrayList;
 import java.util.List;
 
 import javax.ejb.Remote;
@@ -13,9 +14,10 @@ import javax.persistence.TypedQuery;
 import javax.validation.ConstraintViolationException;
 
 import com.sample.jpa.entities.Component;
+import com.sample.jpa.entities.User;
 
 @Stateless
-@Remote(UserService.class) 
+@Remote(ComponentService.class) 
 public class ComponentServiceImpl implements Serializable, ComponentService {
 
 	/**
@@ -111,6 +113,41 @@ public class ComponentServiceImpl implements Serializable, ComponentService {
 			return 0;
 		else
 			return 1;
+	}
+	
+	@Override
+	public String[] getAllComponentNames(){
+		Component comp=new Component();
+		
+		
+		List<Component> comp_list=new ArrayList<Component>();
+		comp_list= getComponent(comp);
+		
+		String[] compNames= new String[comp_list.size()];
+		for(int i=0;i<comp_list.size();i++){
+			compNames[i]=comp_list.get(i).getName();
+		}
+		
+		
+		
+		return compNames;
+		
+	}
+	
+	@Override
+	public Component getComponent(String name){
+		Component comp=new Component();
+		List<Component> comp_list=new ArrayList<Component>();
+		comp_list= getComponent(comp);
+		
+		String[] compNames= new String[comp_list.size()];
+		for(int i=0;i<comp_list.size();i++){
+			if(comp_list.get(i).getName().equals(name))
+				comp=comp_list.get(i);
+		}
+		
+		
+		return comp;
 	}
 
 }
