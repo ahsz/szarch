@@ -3,7 +3,6 @@ package com.sample.ejb;
 import java.util.List;
 
 import com.sample.jpa.entities.Contain;
-import com.sample.jpa.entities.Orders;
 
 public interface ContainService {
 

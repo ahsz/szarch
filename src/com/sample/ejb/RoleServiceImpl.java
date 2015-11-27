@@ -12,7 +12,6 @@ import javax.persistence.TypedQuery;
 import javax.validation.ConstraintViolationException;
 
 import com.sample.jpa.entities.Role;
-import com.sample.jpa.entities.User;
 
 @Stateless
 @Remote(UserService.class) 	

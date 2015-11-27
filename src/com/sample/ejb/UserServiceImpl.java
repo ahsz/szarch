@@ -1,8 +1,6 @@
 package com.sample.ejb;
 
 import java.io.Serializable;
-import java.lang.reflect.Array;
-import java.util.ArrayList;
 import java.util.List;
 
 import javax.ejb.Remote;
@@ -11,11 +9,9 @@ import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
 import javax.persistence.PersistenceException;
 import javax.validation.ConstraintViolationException;
-import javax.persistence.Query;
 import javax.persistence.TransactionRequiredException;
 import javax.persistence.TypedQuery;
 
-import com.sample.client.MainWindow;
 import com.sample.jpa.entities.User;
 
 

@@ -3,7 +3,6 @@ package com.sample.ejb;
 import java.util.List;
 
 import com.sample.jpa.entities.Manuf_scope;
-import com.sample.jpa.entities.User;
 
 public interface Manuf_scopeService {
 	public int addManuf_scope(Manuf_scope manuf_scope);

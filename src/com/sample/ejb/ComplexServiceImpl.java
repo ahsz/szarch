@@ -12,12 +12,13 @@ import javax.persistence.TransactionRequiredException;
 import javax.persistence.TypedQuery;
 import javax.validation.ConstraintViolationException;
 
+import com.sample.jpa.entities.Complex;
 import com.sample.jpa.entities.Orders;
 
 @Stateless
 @Remote(UserService.class) 
-public class OrdersServiceImpl implements OrdersService, Serializable {
-
+public class ComplexServiceImpl implements Serializable, ComplexService {
+	
 	/**
 	 * 
 	 */
@@ -26,14 +27,14 @@ public class OrdersServiceImpl implements OrdersService, Serializable {
 	
 	@PersistenceContext(name = "Anyagbeszer")
 	private EntityManager em;
-
+	
 	@Override
-	public int addOrders(Orders orders) {
-		if (orders.getManuf_scope_id() == null || orders.getProduct_id() == null || orders.getNumber() == null)
+	public int addComplex(Complex complex) {
+		if (complex.getCmpnt_container_id() == null || complex.getCmpnt_contained_id() == null || complex.getNumber() == null)
 			return -1;
 		
 		try {
-			em.persist(orders);
+			em.persist(complex);
 		} catch (ConstraintViolationException e) {
 			return -2;
 		} catch (IllegalArgumentException e) {
@@ -50,28 +51,27 @@ public class OrdersServiceImpl implements OrdersService, Serializable {
 
 	@Override
 	public String echo(String s) {
-	    return "Orders_44 "+s;
+	    return "Complex_44 "+s;
 	}
-	
+
 	@SuppressWarnings("unchecked")
 	@Override
-	public List<Orders> getOrders(Orders orders) {
-
+	public List<Complex> getComplex(Complex complex) {
 		@SuppressWarnings("unchecked")
-		TypedQuery<Orders> query = em.createQuery("from Orders", Orders.class);
-		List<Orders> ord_list = query.getResultList();
+		TypedQuery<Complex> query = em.createQuery("from Complex", Complex.class);
+		List<Complex> clx_list = query.getResultList();
 		
-		return ord_list;
+		return clx_list;
 	}
 
 	@Override
-	public int updOrders(Orders orders) {
+	public int updComplex(Complex complex) {
 
-		if (orders.getManuf_scope_id() == null || orders.getProduct_id() == null || orders.getNumber() == null)
+		if (complex.getCmpnt_container_id() == null || complex.getCmpnt_contained_id() == null || complex.getNumber() == null)
 			return -1;
 		
 		try {
-			em.merge(orders);
+			em.merge(complex);
 		} catch (ConstraintViolationException e) {
 			return -2;
 		} catch (IllegalArgumentException e) {
@@ -86,13 +86,13 @@ public class OrdersServiceImpl implements OrdersService, Serializable {
 	}
 
 	@Override
-	public int remOrders(Orders orders) {
+	public int remComplex(Complex complex) {
 
-		if (orders.getManuf_scope_id() == null || orders.getProduct_id() == null || orders.getNumber() == null)
+		if (complex.getCmpnt_container_id() == null || complex.getCmpnt_contained_id() == null || complex.getNumber() == null)
 			return -1;
 
 		try {	
-			em.remove(em.contains(orders) ? orders : em.merge(orders));
+			em.remove(em.contains(complex) ? complex : em.merge(complex));
 		} catch (ConstraintViolationException e) {
 			return -2;
 		} catch (IllegalArgumentException e) {
@@ -103,7 +103,7 @@ public class OrdersServiceImpl implements OrdersService, Serializable {
 			return -5;
 		}
 
-		if (em.contains(orders))
+		if (em.contains(complex))
 			return 0;
 		else
 			return 1;

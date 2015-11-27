@@ -3,7 +3,6 @@ package com.sample.ejb;
 import java.util.List;
 
 import com.sample.jpa.entities.Product;
-import com.sample.jpa.entities.Role;
 
 public interface ProductService {
 

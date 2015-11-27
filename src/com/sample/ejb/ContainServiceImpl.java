@@ -13,7 +13,6 @@ import javax.persistence.TypedQuery;
 import javax.validation.ConstraintViolationException;
 
 import com.sample.jpa.entities.Contain;
-import com.sample.jpa.entities.Orders;
 
 @Stateless
 @Remote(UserService.class) 
