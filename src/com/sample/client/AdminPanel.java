@@ -57,13 +57,7 @@ public class AdminPanel extends JPanel {
 
 		final UserService ejb = lookupRemoteEJB();
 
-		
-		/*User user=new User();
-		
-		
-		List<User> usr_list=new ArrayList<User>();
-		usr_list= ejb.getUser(user);*/
-		
+	
 		String[] userNames=ejb.getAllUserNames();
 		
 		setLayout(new MigLayout("", "[127.00px][157.00px][143px]", "[14px][23px]"));
@@ -77,10 +71,25 @@ public class AdminPanel extends JPanel {
 		JComboBox comboBoxUserRoles = new JComboBox(roleStrings);
 		add(comboBoxUserRoles, "cell 1 1,alignx left,aligny center");
 		
+		
+
+
+		
+		comboBoxUserList.addActionListener(new ActionListener() {
+			@Override
+			public void actionPerformed(ActionEvent e) {
+					User updateUser = ejb.getUser(comboBoxUserList.getSelectedItem().toString());
+					comboBoxUserRoles.setSelectedItem(roleStrings[updateUser.getRole_id()-1]);
+
+			}
+		});
+
+		
+		
 		JButton btnJogosultsagBeallitasa = new JButton("Jogosultsag Beallitasa");
 		btnJogosultsagBeallitasa.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				User updateUser=ejb.getUser(comboBoxUserList.getSelectedIndex()+1);
+				User updateUser=ejb.getUser(comboBoxUserList.getSelectedItem().toString());
 				updateUser.setRole_id(comboBoxUserRoles.getSelectedIndex()+1);
 				ejb.updUser(updateUser);
 			}

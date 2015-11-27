@@ -47,6 +47,7 @@ public class MainWindow {
 	private static int TYPE_LOGIN= 8;
 	
 	//static { ut = new Utility(); }//
+	public static int USER_TYPE=4;
 	
 	/**
 	 * Launch the application.
@@ -229,7 +230,12 @@ public class MainWindow {
 	    	if(type != TYPE_LOGIN)
 		    oldPanel.add(newPanel);
 	    	if(type == TYPE_LOGIN){
-	    		startPanel.addLoginFields();
+	    		try {
+					startPanel.addLoginFields();
+				} catch (NamingException e) {
+					// TODO Auto-generated catch block
+					e.printStackTrace();
+				}
 	    	}
 		    oldPanel.revalidate();
 		    oldPanel.repaint();   

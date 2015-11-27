@@ -14,6 +14,6 @@ public interface UserService {
 	public int updUser(User user);
 	public int remUser(User user);
 	public String[] getAllUserNames();
-	public User getUser(int Id);
-
+	public User getUser(String name);
+	public User loginUser(User loginRequest);
 }

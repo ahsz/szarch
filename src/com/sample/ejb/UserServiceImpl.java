@@ -138,19 +138,36 @@ public class UserServiceImpl implements UserService, Serializable {
 		
 	}
 	@Override
-	public User getUser(int Id){
+	public User getUser(String name){
 		User user=new User();
 		List<User> usr_list=new ArrayList<User>();
 		usr_list= getUser(user);
 		
 		String[] userNames= new String[usr_list.size()];
 		for(int i=0;i<usr_list.size();i++){
-			if(usr_list.get(i).getId()==Id)
+			if(usr_list.get(i).getName().equals(name))
 				user=usr_list.get(i);
 		}
 		
 		
 		return user;
+	}
+	@Override
+	public User loginUser(User loginRequest){
+		
+		User user=new User();
+		List<User> usr_list=new ArrayList<User>();
+		usr_list= getUser(user);
+		
+		for(int i=0;i<usr_list.size();i++){
+			boolean name=usr_list.get(i).getName().equals(loginRequest.getName());
+			boolean password=usr_list.get(i).getPassword().equals(loginRequest.getPassword());
+			if(name&&password)
+				user=usr_list.get(i);
+		}
+		
+		return user;
+		
 	}
 	
 }

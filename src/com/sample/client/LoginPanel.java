@@ -8,6 +8,7 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.io.IOException;
 import java.net.URISyntaxException;
+import java.security.MessageDigest;
 import java.util.ArrayList;
 import java.util.Hashtable;
 import java.util.List;
@@ -22,6 +23,8 @@ import javax.swing.JTextField;
 //import java.util.stream.Collectors;
 import javax.swing.SpringLayout;
 
+import org.apache.commons.codec.digest.DigestUtils;
+
 import com.sample.ejb.RoleService;
 import com.sample.ejb.RoleServiceImpl;
 import com.sample.ejb.UserService;
@@ -33,14 +36,14 @@ public class LoginPanel extends JPanel {
 	private JTextField textField;
 	private JTextField textField_1;
 
-	public LoginPanel() {
+	public LoginPanel() throws NamingException {
 		addLoginFields();
 	}
 	
-	public void addLoginFields(){
+	public void addLoginFields() throws NamingException{
 		SpringLayout springLayout = new SpringLayout();
 		setLayout(springLayout);
-		
+		String[] roleStrings = { "Manager", "Gyartasvezeto","Beszerzo","default"};
 		JLabel lblKeremJelentkezzenBe = new JLabel("Kerem jelentkezzen be!");
 		add(lblKeremJelentkezzenBe);
 		
@@ -79,31 +82,44 @@ public class LoginPanel extends JPanel {
 		add(btnRegisztracio);
 
 		
-		
+
+		final UserService ejb = lookupRemoteEJB();
+
 		
 		btnRegisztracio.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {
-				try {
-					testRemoteEJB();
-				} catch (NamingException e) {
-					// TODO Auto-generated catch block
-					e.printStackTrace();
-				}
-				lblKeremJelentkezzenBe.setText("belogolva");
+				User user=new User();
 
+				User regTest=ejb.getUser(textField.getText());
+				
+				if(regTest.getId()==null){
+					user.setName(textField.getText());
+					user.setPassword(DigestUtils.md5Hex( textField_1.getText() ));
+					user.setRole_id(4);
+					ejb.addUser(user);
+					lblKeremJelentkezzenBe.setText("Sikeres regisztracio, kerem jelentkezzen be!");
+				
+				}else{
+					lblKeremJelentkezzenBe.setText("Mar letezik ilyen felhasznalo");
+				}
+
+				
 			}
 		});
 		
 		btnBejelentkezes.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {
-
-				try {
-					testRemoteEJB2();
-				} catch (NamingException e) {
-					// TODO Auto-generated catch block
-					e.printStackTrace();
+				User user=new User();
+				user.setName(textField.getText());
+				user.setPassword(DigestUtils.md5Hex( textField_1.getText() ));
+				User loggedInUser=ejb.loginUser(user);
+				if(loggedInUser.getId()!=null){
+					MainWindow.USER_TYPE=loggedInUser.getRole_id();
+					lblKeremJelentkezzenBe.setText("Sikeresen bejelentkezett: " +loggedInUser.getName() + " " + roleStrings[loggedInUser.getRole_id()-1]);
+				}else{
+					lblKeremJelentkezzenBe.setText("Nincs ilyen felhasznalo, vagy hibas a jelszo.");
 				}
-				lblKeremJelentkezzenBe.setText("regelve");
+
 
 			}
 		});
@@ -112,7 +128,7 @@ public class LoginPanel extends JPanel {
 	
 	
 	
-	
+	/*
 	private static void testRemoteEJB2() throws NamingException {
 
 
@@ -125,56 +141,7 @@ public class LoginPanel extends JPanel {
         
 		String ss = role_ejb.echo("Frank_role"); 
         System.out.println(ss);
-        
-        // Add new user
-        /*
-		User user = new User();
-	
-		user.setName("andraskaaaaaaaa");
-		user.setPassword("password");
-		user.setRole_id(1);
-
-		int i = ejb.addUser(user);
-		System.out.println(i);
-		*/
-        
-        // List users
-        /*
-        User user = new User();
-    
-		List<User> usr_list = ejb.getUser(user);
-
-		for (int i = 0; i < usr_list.size(); i++){
-			System.out.println(usr_list.get(i));
-		}
-		*/
-        
-        // Update user
-        /*
-		User user = new User();
-		
-		user.setId(2);
-		user.setName("andras_updated");
-		user.setPassword("password_updated");
-		user.setRole_id(1);
-		
-		int i  = ejb.updUser(user);
-		System.out.println(i);
-		*/
-        
-        // Delete user
-        
-        /*
-        User user = new User();
-       
-		user.setId(5);
-		user.setName("andraska");
-		user.setPassword("password");
-		user.setRole_id(1);
-		int i  = ejb.remUser(user);
-		System.out.println(i);
-		*/
-	
+      
         // Add new role
         
 		Role role = new Role();
@@ -184,7 +151,7 @@ public class LoginPanel extends JPanel {
 		int i = role_ejb.addRole(role);
 		System.out.println(i);
 		
-	}
+	}*/
 
 	
 	
@@ -222,7 +189,7 @@ public class LoginPanel extends JPanel {
 				"ejb:" + appName + "/" + moduleName + "/" + distinctName + "/" + beanName + "!" + viewClassName);
 
 	}
-	
+	/*
 	private static RoleService role_lookupRemoteEJB() throws NamingException {
 		final Hashtable jndiProperties = new Hashtable();
 		jndiProperties.put(Context.URL_PKG_PREFIXES, "org.jboss.ejb.client.naming");
@@ -242,6 +209,6 @@ public class LoginPanel extends JPanel {
 		return (RoleService) context.lookup(
 				"ejb:" + appName + "/" + moduleName + "/" + distinctName + "/" + beanName + "!" + viewClassName);
 
-	}
+	}*/
 	
 }
