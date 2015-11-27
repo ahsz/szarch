@@ -32,6 +32,10 @@ public class LoginPanel extends JPanel {
 	private JTextField textField_1;
 
 	public LoginPanel() {
+		addLoginFields();
+	}
+	
+	public void addLoginFields(){
 		SpringLayout springLayout = new SpringLayout();
 		setLayout(springLayout);
 		
@@ -101,8 +105,6 @@ public class LoginPanel extends JPanel {
 
 			}
 		});
-	
-	
 	
 	}
 	

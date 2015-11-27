@@ -1,25 +1,54 @@
 package com.sample.client;
+
 /*
- * Komplex alkatrészek kezelése
+ * Gyártási célok kezelése
  */
 
+import java.awt.Dimension;
+import java.awt.image.BufferedImage;
+import java.io.File;
+import java.io.IOException;
+import java.util.ArrayList;
+import java.util.List;
+
+import javax.imageio.ImageIO;
+import javax.swing.ImageIcon;
 import javax.swing.JPanel;
-import javax.swing.JScrollPane;
-import javax.swing.JTextField;
-
-import net.miginfocom.swing.MigLayout;
-
-import java.awt.CardLayout;
-import java.awt.Color;
-import java.awt.GridLayout;
-import java.awt.event.ActionEvent;
-import java.awt.event.ActionListener;
-
+import javax.swing.JRadioButton;
 import javax.swing.JButton;
 import javax.swing.JComboBox;
-import javax.swing.JLabel;
+import javax.swing.JFrame;
+import javax.swing.ButtonGroup;
+import javax.swing.GroupLayout;
+import javax.swing.GroupLayout.Alignment;
+import javax.swing.LayoutStyle.ComponentPlacement;
+import javax.swing.plaf.DimensionUIResource;
+import javax.swing.JTextField;
+import javax.swing.JTextPane;
 
-public class ComponentComplexPanel extends JPanel {
+import java.awt.event.ActionListener;
+import java.awt.event.ActionEvent;
+
+import javax.swing.JLabel;
+import javax.swing.SwingConstants;
+import javax.swing.SwingUtilities;
+
+import java.awt.BorderLayout;
+import java.awt.CardLayout;
+import java.awt.Color;
+import java.awt.Container;
+
+import com.jgoodies.forms.layout.FormLayout;
+import com.jgoodies.forms.layout.ColumnSpec;
+import com.jgoodies.forms.layout.RowSpec;
+import com.sun.xml.internal.ws.api.Component;
+
+import java.awt.GridLayout;
+import javax.swing.JScrollPane;
+import net.miginfocom.swing.MigLayout;
+
+public class ManufactureScopeHandlePanel extends JPanel {
+
 	JPanel panelCont = this;
 	JPanel panelFirst = new JPanel();
 	JPanel panelSecond = new JPanel();
@@ -27,7 +56,7 @@ public class ComponentComplexPanel extends JPanel {
 	JButton buttonOne = new JButton("Switch to second panel/workspace");
 	JButton buttonSecond = new JButton("Switch to first panel/workspace");
 	CardLayout cl = new CardLayout();
-	String[] modeString = { "Komplex alkatresz felvetele", "Komplex alkatresz modositasa", "Komplex alkatresz torlese" };
+	String[] modeString = { "Gyartasi cel felvetele", "Gyartasi cel modositasa", "Gyartasi cel torlese" };
 	private final JComboBox comboBoxFunctionSwitcher1 = new JComboBox(modeString);
 	private final JComboBox comboBoxFunctionSwitcher2 = new JComboBox(modeString);
 	private final JComboBox comboBoxFunctionSwitcher3 = new JComboBox(modeString);
@@ -49,7 +78,10 @@ public class ComponentComplexPanel extends JPanel {
 	private  JScrollPane scrollPaneSecond;
 
 
-	public ComponentComplexPanel() {
+	/**
+	 * Create the panel.
+	 */
+	public ManufactureScopeHandlePanel() {
 		
 
 		txtTermeknevFirst.setText("Termeknev");

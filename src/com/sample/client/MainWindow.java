@@ -12,6 +12,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 import javax.swing.JFrame;
+import javax.swing.JLabel;
 import javax.swing.JMenu;
 import javax.swing.JMenuBar;
 import javax.swing.JMenuItem;
@@ -21,9 +22,10 @@ import javax.swing.JProgressBar;
 
 public class MainWindow {
 
+	private LoginPanel loginPanel;
 	private JFrame initialWindow;
 	private LoginPanel startPanel= null;
-	private ManufactureScopeNewPanel manufactureScopeNewPanel;
+	private ManufactureScopeHandlePanel manufactureScopeHandlePanel;
 	private AdminPanel adminPanel;
 	
 	private ProductBrowsePanel  productBrowsePanel;
@@ -41,6 +43,7 @@ public class MainWindow {
 	private static int TYPE_COMPONENT_COMPLEX = 5;
 	private static int TYPE_COMPONENT = 6;
 	private static int TYPE_MANUF_BROWSE= 7;
+	private static int TYPE_LOGIN= 8;
 	
 	//static { ut = new Utility(); }//
 	
@@ -97,19 +100,11 @@ public class MainWindow {
 		menuBar.add(menuFile);
 		
 		
-		/*
-		private static int TYPE_MANUF_NEW = 1;
-		private static int TYPE_ADMIN = 2;
-		private static int TYPE_PRODUCT_BROWSE = 3;
-		private static int TYPE_PRODUCT_MODIFY = 4;
-		private static int TYPE_COMPONENT_COMPLEX = 5;
-		private static int TYPE_COMPONENT = 6;
-		private static int TYPE_MANUF_BROWSE= 7;*/
 		
 		//Manager---------------------------------------------------------------------------------------------
 		JMenuItem menuItemManufactureScopeNew = new JMenuItem("Gyartasi celok kezelese");
 		menuFile.add(menuItemManufactureScopeNew);
-		menuItemManufactureScopeNew.addActionListener(new MenuAction(startPanel, manufactureScopeNewPanel, TYPE_MANUF_NEW));
+		menuItemManufactureScopeNew.addActionListener(new MenuAction(startPanel, manufactureScopeHandlePanel, TYPE_MANUF_NEW));
 
 				
 		JMenuItem menuItemAdmin = new JMenuItem("Admin felulet");
@@ -144,7 +139,7 @@ public class MainWindow {
 
 		JMenuItem menuItemSearch = new JMenuItem("Kilepes");
 		menuFile.add(menuItemSearch);
-		menuItemSearch.addActionListener(new MenuAction(startPanel, adminPanel, TYPE_ADMIN));
+		menuItemSearch.addActionListener(new MenuAction(startPanel, loginPanel, TYPE_LOGIN));
 		
 		
 	}
@@ -182,9 +177,12 @@ public class MainWindow {
 	    }
 	    
 	    private void changePanel(JPanel oldPanel, JPanel panel, int type) {
+	    	
+	    	
+
 	    	if(type == TYPE_MANUF_NEW){
-		    	manufactureScopeNewPanel = new ManufactureScopeNewPanel();
-		    	newPanel = manufactureScopeNewPanel;
+		    	manufactureScopeHandlePanel = new ManufactureScopeHandlePanel();
+		    	newPanel = manufactureScopeHandlePanel;
 	    	}
 		    if(type == TYPE_ADMIN){
 		    	adminPanel = new AdminPanel();
@@ -222,7 +220,11 @@ public class MainWindow {
 	private ManufactureScopeBrowsePanel mnufactureScopeBrowsePanel;
 			*/
 	    	oldPanel.removeAll();
+	    	if(type != TYPE_LOGIN)
 		    oldPanel.add(newPanel);
+	    	if(type == TYPE_LOGIN){
+	    		startPanel.addLoginFields();
+	    	}
 		    oldPanel.revalidate();
 		    oldPanel.repaint();   
 		}

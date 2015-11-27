@@ -20,6 +20,8 @@ import java.io.File;
 import java.io.IOException;
 import java.text.SimpleDateFormat;
 import java.util.Calendar;
+import net.miginfocom.swing.MigLayout;
+import javax.swing.JComboBox;
 
 public class ProductBrowsePanel extends JPanel {
 	private JLabel txtTitleName;
@@ -34,9 +36,19 @@ public class ProductBrowsePanel extends JPanel {
 	 * Create the panel.
 	 */
 	public ProductBrowsePanel() {
+		setLayout(new MigLayout("", "[133px,grow][grow][][][][][][]", "[14px][][][][][]"));
+		String[] productList = { "Bird", "Cat", "Dog", "Rabbit", "Pig" };
 		
 		JLabel lblKesztermekekMegtekintese = new JLabel("Kesztermekek megtekintese");
-		this.add(lblKesztermekekMegtekintese);
+		this.add(lblKesztermekekMegtekintese, "cell 0 0,alignx left,aligny top");
+		JComboBox comboBox = new JComboBox(productList);
+		add(comboBox, "cell 0 1,growx");
+		
+		JLabel lblTermek = new JLabel("Termek 1");
+		add(lblTermek, "cell 0 2");
+		
+		JLabel lblTermekDb = new JLabel("Termek 1 db");
+		add(lblTermekDb, "cell 1 2");
 
 
 	}
