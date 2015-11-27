@@ -28,7 +28,6 @@ public class UserServiceImpl implements UserService, Serializable {
 	@PersistenceContext(name = "Anyagbeszer")
 	private EntityManager em;
 
-	//private Class<User> entityClass;
 	
 	@Override
 	public int addUser(User user) {
@@ -56,7 +55,6 @@ public class UserServiceImpl implements UserService, Serializable {
 	
     @Override
     public String echo(String s) {
- 
         return "User_44 "+s;
     }
  
