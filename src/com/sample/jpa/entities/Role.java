@@ -2,6 +2,8 @@ package com.sample.jpa.entities;
 
 import java.io.Serializable;
 
+import javax.ejb.Remote;
+import javax.ejb.Stateless;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
@@ -12,6 +14,8 @@ import javax.persistence.Table;
 import javax.persistence.TableGenerator;
 import javax.persistence.UniqueConstraint;
 
+import com.sample.ejb.UserService;
+
 
 
 @Entity
@@ -19,17 +23,19 @@ import javax.persistence.UniqueConstraint;
 		name = "role",
 		uniqueConstraints=@UniqueConstraint(columnNames={"name"})		
 )
-		
+
+@Stateless
+@Remote(UserService.class) 		
 public class Role implements Serializable{
 
 	 private static final long serialVersionUID = 1L;
 	 
 	@Id
 	@GeneratedValue(strategy = javax.persistence.GenerationType.IDENTITY)
-	@Column(name = "id", unique = true, nullable = true)
+	@Column(name = "id", unique = true, nullable = false)
 	private java.lang.Integer id;
 	
-	@Column(name = "name", unique = true, nullable = true)
+	@Column(name = "name", unique = true, nullable = false)
 	private String name;
 
 	

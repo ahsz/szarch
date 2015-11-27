@@ -26,16 +26,16 @@ public class User implements Serializable{
 	 
 	@Id
 	@GeneratedValue(strategy = javax.persistence.GenerationType.IDENTITY)
-	@Column(name = "id", unique = true, nullable = true)
+	@Column(name = "id", unique = true, nullable = false)
 	private java.lang.Integer id;
 	
-	@Column(name = "name", unique = true, nullable = true)
+	@Column(name = "name", unique = true, nullable = false)
 	private String name;
 
-	@Column(name = "password", nullable = true)
+	@Column(name = "password", nullable = false)
 	private String password;
 	
-	@Column(name = "role_id", nullable = true)
+	@Column(name = "role_id", nullable = false)
 	private java.lang.Integer  role_id;
 	
 	
