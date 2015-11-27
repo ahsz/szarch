@@ -45,7 +45,7 @@ public class RoleServiceImpl implements RoleService {
 	@Override
 	public String echo(String s) {
 		
-		return "Hellooooo43 "+s;
+		return "Role_44 "+s;
 	
 	}
 	
@@ -85,7 +85,7 @@ public class RoleServiceImpl implements RoleService {
 
 	@Override
 	public int remRole(Role role) {
-		if (role.getName() == null || role.getId() == null )
+		if (role.getId() == null || role.getName() == null)
 			return -1;
 
 

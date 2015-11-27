@@ -61,7 +61,7 @@ public class UserServiceImpl implements UserService, Serializable {
     @Override
     public String echo(String s) {
  
-        return "Hellooooo44 "+s;
+        return "User_44 "+s;
     }
  
 	
@@ -102,7 +102,7 @@ public class UserServiceImpl implements UserService, Serializable {
 	@Override
 	public int remUser(User user){
 		
-		if ((user.getName() == null || user.getPassword() == null || user.getRole_id() == null) || user.getId() == null )
+		if (user.getId() == null || user.getName() == null || user.getPassword() == null || user.getRole_id() == null)
 			return -1;
 
 
