@@ -1,73 +1,63 @@
 package com.sample.jpa.entities;
 
+import java.io.Serializable;
+
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.SequenceGenerator;
 import javax.persistence.Table;
 import javax.persistence.TableGenerator;
+import javax.persistence.UniqueConstraint;
+
+
 
 @Entity
-@Table(name = "user")
-public class User {
+@Table(
+		name = "user",
+		uniqueConstraints=@UniqueConstraint(columnNames={"name"})		
+)
+		
+public class User implements Serializable{
 
+	 private static final long serialVersionUID = 1L;
+	 
 	@Id
-	@Column(name = "id")
-	private int employeeId;
+	@GeneratedValue(strategy = javax.persistence.GenerationType.IDENTITY)
+	@Column(name = "id", unique = true, nullable = true)
+	private java.lang.Integer id;
 	
-	@Column(name = "name")
+	@Column(name = "name", unique = true, nullable = true)
 	private String name;
 
-	@Column(name = "password")
+	@Column(name = "password", nullable = true)
 	private String password;
 	
-	@Column(name = "role_id")
-	private int  role_id;
-	
-	public String getName() {
-		return name;
-	}
+	@Column(name = "role_id", nullable = true)
+	private java.lang.Integer  role_id;
 	
 	
-	/*
-	@TableGenerator(name = "employee_gen", table = "id_gen", pkColumnName = "gen_name", valueColumnName = "gen_val", allocationSize = 1, pkColumnValue = "employee_gen")
+	public java.lang.Integer getId()			{ return id; }	
+	public String getName() 					{ return name; }
+	public String getPassword() 				{ return password; }
+	public java.lang.Integer getRole_id()		{ return role_id; }
 	
-	@GeneratedValue(strategy = GenerationType.TABLE, generator = "employee_gen")
-	private int employeeId;
-
-	@Column(name = "first_name")
-	private String firstName;
-
-	@Column(name = "last_name")
-	private String lastName;
-
-	private double salary;
-
-	public String getFirstName() {
-		return firstName;
+	public void setId(java.lang.Integer new_id)				{ this.id = new_id; }
+	public void setName(String new_name) 					{ this.name = new_name; }
+	public void setPassword(String new_pw) 					{ this.password = new_pw; }
+	public void setRole_id(java.lang.Integer new_role_id) 	{ this.role_id = new_role_id; }
+	
+	public User() {
+		id = null;
+		name = null;
+		password = null;
+		role_id = null;
 	}
-
-	public void setFirstName(String firstName) {
-		this.firstName = firstName;
+	
+	public String toString() {
+		return id + "\t" + name + "\t" + password + "\t" + role_id;
 	}
-
-
-
-	public void setLastName(String lastName) {
-		this.lastName = lastName;
-	}
-
-	public double getSalary() {
-		return salary;
-	}
-
-	public void setSalary(double salary) {
-		this.salary = salary;
-	}
-
-	public int getEmployeeId() {
-		return employeeId;
-	}*/
 
 }
