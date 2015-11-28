@@ -9,9 +9,13 @@ import java.awt.image.BufferedImage;
 import java.io.File;
 import java.io.IOException;
 import java.util.ArrayList;
+import java.util.Hashtable;
 import java.util.List;
 
 import javax.imageio.ImageIO;
+import javax.naming.Context;
+import javax.naming.InitialContext;
+import javax.naming.NamingException;
 import javax.swing.ImageIcon;
 import javax.swing.JPanel;
 import javax.swing.JRadioButton;
@@ -41,6 +45,16 @@ import java.awt.Container;
 import com.jgoodies.forms.layout.FormLayout;
 import com.jgoodies.forms.layout.ColumnSpec;
 import com.jgoodies.forms.layout.RowSpec;
+import com.sample.ejb.Manuf_scopeService;
+import com.sample.ejb.Manuf_scopeServiceImpl;
+import com.sample.ejb.OrdersService;
+import com.sample.ejb.OrdersServiceImpl;
+import com.sample.ejb.ProductService;
+import com.sample.ejb.ProductServiceImpl;
+import com.sample.jpa.entities.Contain;
+import com.sample.jpa.entities.Manuf_scope;
+import com.sample.jpa.entities.Orders;
+import com.sample.jpa.entities.Product;
 import com.sun.xml.internal.ws.api.Component;
 
 import java.awt.GridLayout;
@@ -63,15 +77,19 @@ public class ManufactureScopeBrowsePanel extends JPanel {
 	private final JLabel txtTermeknevFirst = new JLabel();
 	private final JLabel txtTermeknevSecond = new JLabel();
 	private final JLabel txtTermekDarabFirst = new JLabel();
-	private final JComboBox comboBox = new JComboBox();
+
 	private final JLabel lblAlkatreszNeve = new JLabel("Alkatresz neve");
 	private final JLabel lblAlkatreszDarab = new JLabel("Alkatresz darab");
 	private final JButton btnMegrendel = new JButton("Megrendel");
 	/**
 	 * Create the panel.
+	 * @throws NamingException 
 	 */
-	public ManufactureScopeBrowsePanel() {
-		
+	public ManufactureScopeBrowsePanel() throws NamingException {
+		final ProductService ejbProduct = lookupRemoteEJB();
+
+		final OrdersService ejbOrders = lookupOrdersRemoteEJB();
+		final Manuf_scopeService ejbManuf_scope = lookupManuf_scopeRemoteEJB();
 		txtTermeknevFirst.setText("Termeknev");
 		
 		txtTermekDarabFirst.setText("Darab");
@@ -115,8 +133,8 @@ public class ManufactureScopeBrowsePanel extends JPanel {
 		
 		//----------------------------MASODIK PANEL----------------------------------
 
-		
-		
+		String[] allManufScopes=ejbManuf_scope.getAllManuf_scopeNames();
+		JComboBox comboBox = new JComboBox(allManufScopes);
 		panelSecond.setSize(1000,1000);
 		panelCont.add(panelSecond, "2");
 		panelSecond.setLayout(new MigLayout("", "[163px][4px][138px][89px]", "[20px][23px][23px][87px]"));
@@ -124,6 +142,14 @@ public class ManufactureScopeBrowsePanel extends JPanel {
 		panelSecond.add(comboBoxFunctionSwitcher2, "cell 2 0");
 		
 		panelSecond.add(comboBox, "cell 0 1");
+		btnMegrendel.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				Manuf_scope manufScopeToUpdate = ejbManuf_scope.getManuf_scope(comboBox.getSelectedItem().toString());
+				manufScopeToUpdate.setIs_ordered(1);
+				ejbManuf_scope.updManuf_scope(manufScopeToUpdate);
+				
+			}
+		});
 		
 		panelSecond.add(btnMegrendel, "cell 1 1");
 		
@@ -131,6 +157,61 @@ public class ManufactureScopeBrowsePanel extends JPanel {
 		panelSecond.add(lblAlkatreszDarab, "cell 1 2");
 		
 
+		
+		
+		comboBox.addActionListener(new ActionListener() {
+			@Override
+			public void actionPerformed(ActionEvent e) {
+				if (comboBox.getSelectedItem() != null) {
+					Manuf_scope manufScopeToUpdate = ejbManuf_scope.getManuf_scope(comboBox.getSelectedItem().toString());
+
+				//	txtTermeknevSecond.setText(prodToUpdate.getName());
+					panelSecond.removeAll();
+					
+					panelSecond.add(comboBoxFunctionSwitcher2, "cell 2 0");
+					
+					panelSecond.add(comboBox, "cell 0 1");
+					
+					panelSecond.add(btnMegrendel, "cell 1 1");
+					
+					
+					
+					/*panelSecond.add(lblAlkatreszNeve, "cell 0 2");
+					panelSecond.add(lblAlkatreszDarab, "cell 1 2");*/
+					
+
+					List<Orders> orders_list = new ArrayList<Orders>();
+					orders_list = ejbOrders.getOrdersToDelete(manufScopeToUpdate.getId());
+
+					for (int i = 0; i < orders_list.size(); i++) {
+						
+						
+						JLabel lblTermek = new JLabel(ejbProduct.getProduct(orders_list.get(i).getProduct_id()).getName());
+						panelSecond.add(lblTermek, "cell 0 "+ 2+i);
+						
+						JLabel lblTermekDb = new JLabel(orders_list.get(i).getNumber().toString());
+						panelSecond.add(lblTermekDb, "cell 1 "+ 2+i);
+					}
+
+					panelSecond.revalidate();
+					validate();
+
+				}
+			}
+		});
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
 		comboBoxFunctionSwitcher2.addActionListener(new ActionListener() {
 			@Override
 			public void actionPerformed(ActionEvent e) {
@@ -146,5 +227,66 @@ public class ManufactureScopeBrowsePanel extends JPanel {
 
 
 	}
+	private static ProductService lookupRemoteEJB() throws NamingException {
+		final Hashtable jndiProperties = new Hashtable();
+		jndiProperties.put(Context.URL_PKG_PREFIXES, "org.jboss.ejb.client.naming");
 
+		final Context context = new InitialContext(jndiProperties);
+
+		final String appName = "";
+		final String moduleName = "Anyagbeszer";
+		final String distinctName = "";
+		final String beanName = ProductServiceImpl.class.getSimpleName();
+
+		final String viewClassName = ProductService.class.getName();
+		System.out.println("Looking EJB via JNDI ");
+		System.out.println(
+				"ejb:" + appName + "/" + moduleName + "/" + distinctName + "/" + beanName + "!" + viewClassName);
+
+		return (ProductService) context.lookup(
+				"ejb:" + appName + "/" + moduleName + "/" + distinctName + "/" + beanName + "!" + viewClassName);
+
+	}
+
+	private static OrdersService lookupOrdersRemoteEJB() throws NamingException {
+		final Hashtable jndiProperties = new Hashtable();
+		jndiProperties.put(Context.URL_PKG_PREFIXES, "org.jboss.ejb.client.naming");
+
+		final Context context = new InitialContext(jndiProperties);
+
+		final String appName = "";
+		final String moduleName = "Anyagbeszer";
+		final String distinctName = "";
+		final String beanName = OrdersServiceImpl.class.getSimpleName();
+
+		final String viewClassName = OrdersService.class.getName();
+		System.out.println("Looking EJB via JNDI ");
+		System.out.println(
+				"ejb:" + appName + "/" + moduleName + "/" + distinctName + "/" + beanName + "!" + viewClassName);
+
+		return (OrdersService) context.lookup(
+				"ejb:" + appName + "/" + moduleName + "/" + distinctName + "/" + beanName + "!" + viewClassName);
+
+	}
+
+	private static Manuf_scopeService lookupManuf_scopeRemoteEJB() throws NamingException {
+		final Hashtable jndiProperties = new Hashtable();
+		jndiProperties.put(Context.URL_PKG_PREFIXES, "org.jboss.ejb.client.naming");
+
+		final Context context = new InitialContext(jndiProperties);
+
+		final String appName = "";
+		final String moduleName = "Anyagbeszer";
+		final String distinctName = "";
+		final String beanName = Manuf_scopeServiceImpl.class.getSimpleName();
+
+		final String viewClassName = Manuf_scopeService.class.getName();
+		System.out.println("Looking EJB via JNDI ");
+		System.out.println(
+				"ejb:" + appName + "/" + moduleName + "/" + distinctName + "/" + beanName + "!" + viewClassName);
+
+		return (Manuf_scopeService) context.lookup(
+				"ejb:" + appName + "/" + moduleName + "/" + distinctName + "/" + beanName + "!" + viewClassName);
+
+	}
 }

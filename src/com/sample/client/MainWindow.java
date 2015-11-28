@@ -237,7 +237,12 @@ public class MainWindow {
 		    	newPanel = componentPanel;
 		    }
 		    if(type == TYPE_MANUF_BROWSE){
-		    	mnufactureScopeBrowsePanel = new ManufactureScopeBrowsePanel();
+		    	try {
+					mnufactureScopeBrowsePanel = new ManufactureScopeBrowsePanel();
+				} catch (NamingException e) {
+					// TODO Auto-generated catch block
+					e.printStackTrace();
+				}
 		    	newPanel = mnufactureScopeBrowsePanel;
 		    }
 		    /*
