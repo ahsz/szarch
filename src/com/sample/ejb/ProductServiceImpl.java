@@ -1,6 +1,7 @@
 package com.sample.ejb;
 
 import java.io.Serializable;
+import java.util.ArrayList;
 import java.util.List;
 
 import javax.ejb.Remote;
@@ -12,10 +13,13 @@ import javax.persistence.TransactionRequiredException;
 import javax.persistence.TypedQuery;
 import javax.validation.ConstraintViolationException;
 
+import com.sample.jpa.entities.Complex;
+import com.sample.jpa.entities.Component;
 import com.sample.jpa.entities.Product;
+import com.sample.jpa.entities.User;
 
 @Stateless
-@Remote(UserService.class) 
+@Remote(ProductService.class) 
 public class ProductServiceImpl implements ProductService, Serializable {
 	
 	private static final long serialVersionUID = 1L;
@@ -108,4 +112,54 @@ public class ProductServiceImpl implements ProductService, Serializable {
 			return 1;
 	}
 
+	@Override
+	public Product getProduct(String name){
+		Product prod=new Product();
+		List<Product> prod_list=new ArrayList<Product>();
+		prod_list= getProduct(prod);
+		
+		String[] prodNames= new String[prod_list.size()];
+		for(int i=0;i<prod_list.size();i++){
+			if(prod_list.get(i).getName().equals(name))
+				prod=prod_list.get(i);
+		}
+		
+		
+		return prod;
+	}
+	
+	
+	@Override
+	public Product getProduct(int Id){
+		Product prod=new Product();
+		List<Product> prod_list=new ArrayList<Product>();
+		prod_list= getProduct(prod);
+		
+		String[] prodNames= new String[prod_list.size()];
+		for(int i=0;i<prod_list.size();i++){
+			if(prod_list.get(i).getId()==Id)
+				prod=prod_list.get(i);
+		}
+		
+		
+		return prod;
+	}
+	
+	@Override
+	public String[] getAllProductNames(){
+		Product prod=new Product();
+		
+		
+		List<Product> prod_list=new ArrayList<Product>();
+		prod_list= getProduct(prod);
+		
+		String[] prodNames= new String[prod_list.size()];
+		for(int i=0;i<prod_list.size();i++){
+			prodNames[i]=prod_list.get(i).getName();
+		}
+		
+		
+		
+		return prodNames;
+	}
 }

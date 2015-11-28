@@ -11,4 +11,5 @@ public interface ContainService {
 	public List<Contain> getContain(Contain contain);
 	public int updContain(Contain contain);
 	public int remContain(Contain contain);
+	public List<Contain> getContainToDelete(int Id);
 }

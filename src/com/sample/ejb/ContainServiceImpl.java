@@ -1,6 +1,7 @@
 package com.sample.ejb;
 
 import java.io.Serializable;
+import java.util.ArrayList;
 import java.util.List;
 
 import javax.ejb.Remote;
@@ -13,9 +14,10 @@ import javax.persistence.TypedQuery;
 import javax.validation.ConstraintViolationException;
 
 import com.sample.jpa.entities.Contain;
+import com.sample.jpa.entities.Product;
 
 @Stateless
-@Remote(UserService.class) 
+@Remote(ContainService.class) 
 public class ContainServiceImpl implements Serializable, ContainService {
 	
 	/**
@@ -107,5 +109,29 @@ public class ContainServiceImpl implements Serializable, ContainService {
 		else
 			return 1;
 	}
+	
+	@Override
+	public List<Contain> getContainToDelete(int Id){
+		Contain cont=new Contain();
+		
+		
+		List<Contain> cont_list=new ArrayList<Contain>();
+		cont_list= getContain(cont);
+		
+		List<Contain> prodToDelete= new ArrayList<Contain>();
+		int delCounter=0;
+		for(int i=0;i<cont_list.size();i++){
+			if(cont_list.get(i).getProduct_id()==Id){
+				prodToDelete.add(delCounter, cont_list.get(i));
+				delCounter++;
+			}
+			
+			
+		}
+		
+		return prodToDelete;
+		
+	}
+
 
 }

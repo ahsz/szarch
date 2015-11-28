@@ -200,7 +200,12 @@ public class MainWindow {
 		    	newPanel = productBrowsePanel;
 	    	}
 		    if(type == TYPE_PRODUCT_MODIFY){
-		    	productModifyPanel = new ProductModifyPanel();
+		    	try {
+					productModifyPanel = new ProductModifyPanel();
+				} catch (NamingException e) {
+					// TODO Auto-generated catch block
+					e.printStackTrace();
+				}
 		    	newPanel = productModifyPanel;
 		    }
 	    	if(type == TYPE_COMPONENT_COMPLEX){
