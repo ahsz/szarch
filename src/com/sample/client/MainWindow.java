@@ -196,7 +196,12 @@ public class MainWindow {
 		    	newPanel = adminPanel;
 		    }
 	    	if(type == TYPE_PRODUCT_BROWSE){
-	    		productBrowsePanel = new ProductBrowsePanel();
+	    		try {
+					productBrowsePanel = new ProductBrowsePanel();
+				} catch (NamingException e) {
+					// TODO Auto-generated catch block
+					e.printStackTrace();
+				}
 		    	newPanel = productBrowsePanel;
 	    	}
 		    if(type == TYPE_PRODUCT_MODIFY){
