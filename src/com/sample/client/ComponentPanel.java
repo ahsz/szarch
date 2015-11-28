@@ -48,10 +48,10 @@ public class ComponentPanel extends JPanel {
 	private final JButton btnFelvetelFirst = new JButton("Felvetel");
 	
 	private final JTextField txtTermeknevSecond = new JTextField();
-	private final JButton btnFelvetelSecond = new JButton("Felvetel");
+	private final JButton btnFelvetelSecond = new JButton("Modosit");
 
 
-	private final JComboBox comboBox_1 = new JComboBox();
+
 	private final JButton btnTorles = new JButton("Torles");
 	private final JTextField txtArFirst = new JTextField();
 	private final JTextField txtIdotartamFirst = new JTextField();
@@ -121,7 +121,7 @@ public class ComponentPanel extends JPanel {
 			});
 		
 			JComboBox comboBoxElementSelector = new JComboBox(ejb.getAllComponentNames());
-		
+			JComboBox comboBoxDelSelector = new JComboBox(ejb.getAllComponentNames());
 		comboBoxFunctionSwitcher1.addActionListener(new ActionListener() {
 			@Override
 			public void actionPerformed(ActionEvent e) {
@@ -134,9 +134,11 @@ public class ComponentPanel extends JPanel {
 					comboBoxFunctionSwitcher3.setSelectedItem(modeString[2]);
 				cl.show(panelCont, Integer.toString(jcb.getSelectedIndex() + 1));
 				comboBoxElementSelector.removeAllItems();
-				
-			    for(String s:ejb.getAllComponentNames()){
-			    	comboBoxElementSelector.addItem(ejb.getAllComponentNames());
+				comboBoxDelSelector.removeAllItems();
+				String[] compNames=ejb.getAllComponentNames();
+			    for(int i=0;i<compNames.length;i++){
+			    	comboBoxElementSelector.addItem(compNames[i]);
+			    	comboBoxDelSelector.addItem(compNames[i]);
 			    }
 				
 			}
@@ -168,22 +170,16 @@ public class ComponentPanel extends JPanel {
 		comboBoxElementSelector.addActionListener(new ActionListener() {
 			@Override
 			public void actionPerformed(ActionEvent e) {
+				if(comboBoxElementSelector.getSelectedItem()!=null){
 				Component comp=ejb.getComponent(comboBoxElementSelector.getSelectedItem().toString());
+				
 				txtTermeknevSecond.setText(comp.getName());
 				txtArSecond.setText(comp.getPrice().toString());
-				txtIdotartamSecond.setText(comp.getPurch_time().toString());
+				txtIdotartamSecond.setText(comp.getPurch_time().toString());}
 			}
 		});
 		
-		/*
-		txtTermeknevSecond.setText("Alkatreszneve");
-		panelSecond.add(txtTermeknevSecond, "cell 0 2");
-		panelSecond.add(btnFelvetelSecond, "cell 2 2");
-		
-		panelSecond.add(txtIdotartamSecond, "flowx,cell 0 3");
-		
-		panelSecond.add(txtArSecond, "");*/
-		    
+
 		    
 		    //Mentesnel itt erhetoek el az adatok
 			btnFelvetelSecond.addActionListener(new ActionListener() {
@@ -215,6 +211,13 @@ public class ComponentPanel extends JPanel {
 				if (jcb.getSelectedIndex() == 2)
 					comboBoxFunctionSwitcher3.setSelectedItem(modeString[2]);
 				cl.show(panelCont, Integer.toString(jcb.getSelectedIndex() + 1));
+				comboBoxElementSelector.removeAllItems();
+				comboBoxDelSelector.removeAllItems();
+				String[] compNames=ejb.getAllComponentNames();
+			    for(int i=0;i<compNames.length;i++){
+			    	comboBoxElementSelector.addItem(compNames[i]);
+			    	comboBoxDelSelector.addItem(compNames[i]);
+			    }
 			}
 		});
 
@@ -222,10 +225,27 @@ public class ComponentPanel extends JPanel {
 		comboBoxFunctionSwitcher3.setSelectedItem(modeString[2]);
 		panelThird.add(comboBoxFunctionSwitcher3, "cell 1 0,growx");
 		
-		panelThird.add(comboBox_1, "cell 0 1,growx");
+		panelThird.add(comboBoxDelSelector, "cell 0 1,growx");
 		
 		panelThird.add(btnTorles, "cell 1 1");
 
+		
+		btnTorles.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				
+				Component comp=ejb.getComponent(comboBoxDelSelector.getSelectedItem().toString());
+				ejb.remComponent(comp);
+				comboBoxElementSelector.removeAllItems();
+				comboBoxDelSelector.removeAllItems();
+				String[] compNames=ejb.getAllComponentNames();
+			    for(int i=0;i<compNames.length;i++){
+			    	comboBoxElementSelector.addItem(compNames[i]);
+			    	comboBoxDelSelector.addItem(compNames[i]);
+			    }
+			}
+		});
+		
+		
 		comboBoxFunctionSwitcher3.addActionListener(new ActionListener() {
 			@Override
 			public void actionPerformed(ActionEvent e) {
@@ -237,6 +257,13 @@ public class ComponentPanel extends JPanel {
 				if (jcb.getSelectedIndex() == 2)
 					comboBoxFunctionSwitcher3.setSelectedItem(modeString[2]);
 				cl.show(panelCont, Integer.toString(jcb.getSelectedIndex() + 1));
+				comboBoxElementSelector.removeAllItems();
+				comboBoxDelSelector.removeAllItems();
+				String[] compNames=ejb.getAllComponentNames();
+			    for(int i=0;i<compNames.length;i++){
+			    	comboBoxElementSelector.addItem(compNames[i]);
+			    	comboBoxDelSelector.addItem(compNames[i]);
+			    }
 			}
 		});
 
@@ -263,8 +290,6 @@ public class ComponentPanel extends JPanel {
 
 	}
 	
-	public void refershCompNames(){
-		
-	}
+
 
 }

@@ -1,6 +1,7 @@
 package com.sample.ejb;
 
 import java.io.Serializable;
+import java.util.ArrayList;
 import java.util.List;
 
 import javax.ejb.Remote;
@@ -13,10 +14,12 @@ import javax.persistence.TypedQuery;
 import javax.validation.ConstraintViolationException;
 
 import com.sample.jpa.entities.Complex;
+import com.sample.jpa.entities.Component;
 import com.sample.jpa.entities.Orders;
+import com.sample.jpa.entities.User;
 
 @Stateless
-@Remote(UserService.class) 
+@Remote(ComplexService.class) 
 public class ComplexServiceImpl implements Serializable, ComplexService {
 	
 	/**
@@ -109,4 +112,27 @@ public class ComplexServiceImpl implements Serializable, ComplexService {
 			return 1;
 	}
 
+	@Override
+	public List<Complex> getComplexToDelete(int Id){
+		Complex comp=new Complex();
+		
+		
+		List<Complex> comp_list=new ArrayList<Complex>();
+		comp_list= getComplex(comp);
+		
+		List<Complex> compToDelete= new ArrayList<Complex>();
+		int delCounter=0;
+		for(int i=0;i<comp_list.size();i++){
+			if(comp_list.get(i).getCmpnt_container_id()==Id){
+				compToDelete.add(delCounter, comp_list.get(i));
+				delCounter++;
+			}
+			
+			
+		}
+		
+		return compToDelete;
+		
+	}
+	
 }

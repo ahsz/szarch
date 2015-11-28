@@ -204,7 +204,12 @@ public class MainWindow {
 		    	newPanel = productModifyPanel;
 		    }
 	    	if(type == TYPE_COMPONENT_COMPLEX){
-	    		componentComplexPanel = new ComponentComplexPanel();
+	    		try {
+					componentComplexPanel = new ComponentComplexPanel();
+				} catch (NamingException e) {
+					// TODO Auto-generated catch block
+					e.printStackTrace();
+				}
 		    	newPanel = componentComplexPanel;
 	    	}
 		    if(type == TYPE_COMPONENT){

@@ -122,10 +122,19 @@ public class ComponentServiceImpl implements Serializable, ComponentService {
 		
 		List<Component> comp_list=new ArrayList<Component>();
 		comp_list= getComponent(comp);
-		
-		String[] compNames= new String[comp_list.size()];
+		int compCounter=0;
 		for(int i=0;i<comp_list.size();i++){
-			compNames[i]=comp_list.get(i).getName();
+			if(comp_list.get(i).getIs_complex()==0)
+				compCounter++;
+		}
+
+		String[] compNames= new String[compCounter];
+		compCounter=0;
+		for(int i=0;i<comp_list.size();i++){
+			if(comp_list.get(i).getIs_complex()==0){
+			compNames[compCounter]=comp_list.get(i).getName();
+			compCounter++;
+			}
 		}
 		
 		
@@ -143,6 +152,52 @@ public class ComponentServiceImpl implements Serializable, ComponentService {
 		String[] compNames= new String[comp_list.size()];
 		for(int i=0;i<comp_list.size();i++){
 			if(comp_list.get(i).getName().equals(name))
+				comp=comp_list.get(i);
+		}
+		
+		
+		return comp;
+	}
+	
+	@Override
+	public String[] getAllComplexNames(){
+		Component comp=new Component();
+		
+		
+		List<Component> comp_list=new ArrayList<Component>();
+		comp_list= getComponent(comp);
+		int complexCounter=0;
+		for(int i=0;i<comp_list.size();i++){
+			if(comp_list.get(i).getIs_complex()==1)
+				complexCounter++;
+		}
+
+		String[] compNames= new String[complexCounter];
+		complexCounter=0;
+		for(int i=0;i<comp_list.size();i++){
+			if(comp_list.get(i).getIs_complex()==1){
+			compNames[complexCounter]=comp_list.get(i).getName();
+			complexCounter++;
+			}
+			
+		}
+		
+		
+		
+		return compNames;
+		
+	}
+	
+	
+	@Override
+	public Component getComponent(int Id){
+		Component comp=new Component();
+		List<Component> comp_list=new ArrayList<Component>();
+		comp_list= getComponent(comp);
+		
+		String[] compNames= new String[comp_list.size()];
+		for(int i=0;i<comp_list.size();i++){
+			if(comp_list.get(i).getId()==Id)
 				comp=comp_list.get(i);
 		}
 		

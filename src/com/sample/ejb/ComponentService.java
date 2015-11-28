@@ -13,4 +13,6 @@ public interface ComponentService {
 	public int remComponent(Component component);
 	public String[] getAllComponentNames();
 	public Component getComponent(String name);
+	public String[] getAllComplexNames();
+	public Component getComponent(int Id);
 }

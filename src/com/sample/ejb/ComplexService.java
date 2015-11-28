@@ -11,4 +11,6 @@ public interface ComplexService {
 	public List<Complex> getComplex(Complex complex);
 	public int updComplex(Complex complex);
 	public int remComplex(Complex complex);
+	public List<Complex> getComplexToDelete(int Id);
+
 }
