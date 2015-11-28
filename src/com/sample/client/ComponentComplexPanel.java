@@ -73,12 +73,12 @@ public class ComponentComplexPanel extends JPanel {
 		panelSecond.setLayout(new MigLayout("", "[183px][][][][][][]", "[23px][][][][][][][][]"));
 		panelThird.setLayout(new MigLayout("", "[183px,grow][][][][][][]", "[23px][][][][][][][][]"));
 
-		// TEST, majd del
+		/*// TEST, majd del
 		panelFirst.setBackground(Color.BLUE);
 		panelSecond.setBackground(Color.GREEN);
 		panelThird.setBackground(Color.RED);
 		// Eddig
-
+*/
 		cl.show(panelCont, "Panel1");
 		// ----------------------------ELSO
 		// PANEL----------------------------------
