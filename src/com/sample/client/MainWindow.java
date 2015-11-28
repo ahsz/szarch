@@ -102,7 +102,7 @@ public class MainWindow {
 		menuBar.add(menuFile);
 		
 		
-		
+
 		//Manager---------------------------------------------------------------------------------------------
 		JMenuItem menuItemManufactureScopeNew = new JMenuItem("Gyartasi celok kezelese");
 		menuFile.add(menuItemManufactureScopeNew);
@@ -179,18 +179,28 @@ public class MainWindow {
 	    }
 	    
 	    private void changePanel(JPanel oldPanel, JPanel panel, int type) {
+	    	boolean  loggedIn=false;
 	    	
+	    	if(USER_TYPE==1){
+		    	if(type == TYPE_MANUF_NEW){
+			    	try {
+						manufactureScopeHandlePanel = new ManufactureScopeHandlePanel();
+					} catch (NamingException e) {
+						// TODO Auto-generated catch block
+						e.printStackTrace();
+					}
+			    	newPanel = manufactureScopeHandlePanel;
+			    	loggedIn=true;
+		    	}
+	    	} else{
+	    		if(!loggedIn){
+				JPanel hello=new JPanel();
+		    	JLabel lblKeremJelentkezzenBe = new JLabel("Kerem jelentkezzen be!");
+		    	 hello.add(lblKeremJelentkezzenBe);
+		    	 newPanel= hello;
+	    	}}
 	    	
-
-	    	if(type == TYPE_MANUF_NEW){
-		    	try {
-					manufactureScopeHandlePanel = new ManufactureScopeHandlePanel();
-				} catch (NamingException e) {
-					// TODO Auto-generated catch block
-					e.printStackTrace();
-				}
-		    	newPanel = manufactureScopeHandlePanel;
-	    	}
+	    	if(USER_TYPE==1){
 		    if(type == TYPE_ADMIN){
 		    	try {
 					adminPanel = new AdminPanel();
@@ -199,7 +209,19 @@ public class MainWindow {
 					e.printStackTrace();
 				}
 		    	newPanel = adminPanel;
+		    	loggedIn=true;
 		    }
+	    	} else{
+	    		if(!loggedIn){
+	    	
+				JPanel hello=new JPanel();
+		    	JLabel lblKeremJelentkezzenBe = new JLabel("Kerem jelentkezzen be!");
+		    	 hello.add(lblKeremJelentkezzenBe);
+		    	 newPanel= hello;
+	    	}}
+	    	
+		    
+	    	if(USER_TYPE==2){
 	    	if(type == TYPE_PRODUCT_BROWSE){
 	    		try {
 					productBrowsePanel = new ProductBrowsePanel();
@@ -208,7 +230,17 @@ public class MainWindow {
 					e.printStackTrace();
 				}
 		    	newPanel = productBrowsePanel;
+		    	loggedIn=true;
 	    	}
+	    	} else{  		if(!loggedIn){
+				JPanel hello=new JPanel();
+		    	JLabel lblKeremJelentkezzenBe = new JLabel("Kerem jelentkezzen be!");
+		    	 hello.add(lblKeremJelentkezzenBe);
+		    	 newPanel= hello;
+	    	}}
+	    	
+	    	
+	    	if(USER_TYPE==2){
 		    if(type == TYPE_PRODUCT_MODIFY){
 		    	try {
 					productModifyPanel = new ProductModifyPanel();
@@ -217,7 +249,17 @@ public class MainWindow {
 					e.printStackTrace();
 				}
 		    	newPanel = productModifyPanel;
+		    	loggedIn=true;
 		    }
+	    	} else{	    		if(!loggedIn){
+				JPanel hello=new JPanel();
+		    	JLabel lblKeremJelentkezzenBe = new JLabel("Kerem jelentkezzen be!");
+		    	 hello.add(lblKeremJelentkezzenBe);
+		    	 newPanel= hello;
+	    	}}
+	    	
+		    
+	    	if(USER_TYPE==2){
 	    	if(type == TYPE_COMPONENT_COMPLEX){
 	    		try {
 					componentComplexPanel = new ComponentComplexPanel();
@@ -225,8 +267,18 @@ public class MainWindow {
 					// TODO Auto-generated catch block
 					e.printStackTrace();
 				}
+	    		loggedIn=true;
 		    	newPanel = componentComplexPanel;
 	    	}
+	    	} else{	    		if(!loggedIn){
+				JPanel hello=new JPanel();
+		    	JLabel lblKeremJelentkezzenBe = new JLabel("Kerem jelentkezzen be!");
+		    	 hello.add(lblKeremJelentkezzenBe);
+		    	 newPanel= hello;
+	    	}
+	    	}
+	    	
+	    	if(USER_TYPE==3){
 		    if(type == TYPE_COMPONENT){
 		    	try {
 					componentPanel = new ComponentPanel();
@@ -235,7 +287,17 @@ public class MainWindow {
 					e.printStackTrace();
 				}
 		    	newPanel = componentPanel;
+		    	loggedIn=true;
 		    }
+	    	} else{	    		if(!loggedIn){
+				JPanel hello=new JPanel();
+		    	JLabel lblKeremJelentkezzenBe = new JLabel("Kerem jelentkezzen be!");
+		    	 hello.add(lblKeremJelentkezzenBe);
+		    	 newPanel= hello;
+	    	}}
+	    	
+		    
+	    	if(USER_TYPE==3){
 		    if(type == TYPE_MANUF_BROWSE){
 		    	try {
 					mnufactureScopeBrowsePanel = new ManufactureScopeBrowsePanel();
@@ -244,22 +306,24 @@ public class MainWindow {
 					e.printStackTrace();
 				}
 		    	newPanel = mnufactureScopeBrowsePanel;
+		    	loggedIn=true;
+		    	
 		    }
-		    /*
-	private ManufactureScopeNewPanel manufactureScopeNewPanel;
-	private AdminPanel adminPanel;
-	
-	private ProductBrowsePanel  productBrowsePanel;
-	private ProductModifyPanel  productModifyPanel;
-	private ComponentComplexPanel componentComplexPanel;
-	
-	private ComponentPanel  componentPanel;
-	private ManufactureScopeBrowsePanel mnufactureScopeBrowsePanel;
-			*/
+	    	} else{	    		if(!loggedIn){
+				JPanel hello=new JPanel();
+		    	JLabel lblKeremJelentkezzenBe = new JLabel("Kerem jelentkezzen be!");
+		    	 hello.add(lblKeremJelentkezzenBe);
+		    	 newPanel= hello;
+	    	}}
+	    	
+		    
+		    
+
 	    	oldPanel.removeAll();
 	    	if(type != TYPE_LOGIN)
 		    oldPanel.add(newPanel);
 	    	if(type == TYPE_LOGIN){
+	    		USER_TYPE=4;
 	    		try {
 					startPanel.addLoginFields();
 				} catch (NamingException e) {

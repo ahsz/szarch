@@ -103,19 +103,6 @@ public class ProductBrowsePanel extends JPanel {
 						
 						JLabel lblTermekDb = new JLabel(cont_list.get(i).getNumber().toString());
 						add(lblTermekDb, "cell 1 "+ 2+i);
-						
-						//Component showComp = ejb.getComponent(cont_list.get(i).getComponent_id());
-						//originalUpdateElements = cont_list.size();
-
-						// combok
-						//JComboBox comboBox = new JComboBox(allComponents);
-						//comboBox.setSelectedItem(showComp.getName());
-						//newElementsPanelSecond.add(comboBox);
-						//// darab kiiras
-						//JTextField txtDarab = new JTextField();
-						////txtDarab.setText(cont_list.get(i).getNumber().toString());
-						//newElementsPanelSecond.add(txtDarab);
-						// ejbComplex.remComplex(comp_list.get(i));
 					}
 
 					currentPanel.revalidate();

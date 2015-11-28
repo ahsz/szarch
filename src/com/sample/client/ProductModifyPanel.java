@@ -37,6 +37,7 @@ import javax.naming.NamingException;
 import javax.swing.JButton;
 import javax.swing.JComboBox;
 import javax.swing.JLabel;
+import javax.swing.JOptionPane;
 
 public class ProductModifyPanel extends JPanel {
 	JPanel panelCont = this;
@@ -148,11 +149,13 @@ public class ProductModifyPanel extends JPanel {
 						}
 
 					} else {
-						// error no components
+		    			JOptionPane.showMessageDialog(ProductModifyPanel.this,
+		    				    "Nincs alkatresz megadva");
 					}
 
 				} else {
-					// error name exists
+	    			JOptionPane.showMessageDialog(ProductModifyPanel.this,
+	    				    "Mar letezik");
 				}
 			}
 		});
@@ -322,7 +325,8 @@ public class ProductModifyPanel extends JPanel {
 					newUpdateElements = 0;
 
 				} else {
-					// error no components
+	    			JOptionPane.showMessageDialog(ProductModifyPanel.this,
+	    				    "Nincs alkatresz megadva");
 				}
 
 			}

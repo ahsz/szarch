@@ -110,12 +110,69 @@ public class ManufactureScopeBrowsePanel extends JPanel {
 		//----------------------------ELSO PANEL----------------------------------
 		panelFirst.setSize(1000,1000);
 		panelCont.add(panelFirst, "1");
-		panelFirst.setLayout(new MigLayout("", "[163px][4px][138px][89px]", "[20px][][23px][23px][87px]"));
+		int rowcounter=2;
+		panelFirst.setLayout(new MigLayout("", "[163px][4px][][][][][][][][][][][][]", "[20px][][][][][][][][][][][][][]"));
 		comboBoxFunctionSwitcher1.setSelectedItem(modeString[0]);
 		panelFirst.add(comboBoxFunctionSwitcher1, "cell 2 0,growx,aligny top");
 
 		panelFirst.add(txtTermeknevFirst, "cell 0 1,growx,aligny center");
 		panelFirst.add(txtTermekDarabFirst, "cell 2 1,alignx left,aligny top");
+		
+		
+		Manuf_scope manuf_scopeTemp=new Manuf_scope();
+		List<Manuf_scope> manuf_scope_list=new ArrayList<Manuf_scope>();
+		manuf_scope_list= ejbManuf_scope.getManuf_scope(manuf_scopeTemp);
+		
+		String[] manuf_ScopeNames= new String[manuf_scope_list.size()];
+		for(int i=0;i<manuf_scope_list.size();i++){
+		
+			Manuf_scope manuf_scope=manuf_scope_list.get(i);
+
+
+	//	txtTermeknevSecond.setText(prodToUpdate.getName());
+		panelFirst.removeAll();
+		
+
+		rowcounter++;
+		panelFirst.add(comboBoxFunctionSwitcher1, "cell 2  "+rowcounter+",growx,aligny top");
+		
+		panelFirst.add(btnMegrendel, "cell 1 "+rowcounter);
+		
+		
+
+		
+
+		List<Orders> orders_list = new ArrayList<Orders>();
+		orders_list = ejbOrders.getOrdersToDelete(manuf_scope.getId());
+
+		for (int j = 0; j < orders_list.size(); j++) {
+			
+			rowcounter++;
+			JLabel lblTermek = new JLabel(ejbProduct.getProduct(orders_list.get(j).getProduct_id()).getName());
+			panelFirst.add(lblTermek, "cell 0 "+rowcounter);
+			
+			JLabel lblTermekDb = new JLabel(orders_list.get(j).getNumber().toString());
+			panelFirst.add(lblTermekDb, "cell 2 "+rowcounter);
+		}
+		}
+		panelFirst.revalidate();
+		validate();
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
 		
 		
 		comboBoxFunctionSwitcher1.addActionListener(new ActionListener() {

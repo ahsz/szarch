@@ -41,6 +41,7 @@ import javax.naming.NamingException;
 import javax.swing.JButton;
 import javax.swing.JComboBox;
 import javax.swing.JLabel;
+import javax.swing.JOptionPane;
 
 public class ManufactureScopeHandlePanel extends JPanel {
 	JPanel panelCont = this;
@@ -153,11 +154,13 @@ public class ManufactureScopeHandlePanel extends JPanel {
 						}
 
 					} else {
-						// error no components
+		    			JOptionPane.showMessageDialog(ManufactureScopeHandlePanel.this,
+		    				    "Nincs termek megadva");
 					}
 
-				} else {
-					// error name exists
+				}else{
+	    			JOptionPane.showMessageDialog(ManufactureScopeHandlePanel.this,
+	    				    "Mar letezik");
 				}
 			}
 		});
@@ -321,7 +324,8 @@ public class ManufactureScopeHandlePanel extends JPanel {
 					newUpdateElements = 0;
 
 				} else {
-					// error no components
+	    			JOptionPane.showMessageDialog(ManufactureScopeHandlePanel.this,
+	    				    "Nincs termek megadva");
 				}
 
 			}

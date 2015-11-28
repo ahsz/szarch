@@ -31,6 +31,7 @@ import javax.naming.NamingException;
 import javax.swing.JButton;
 import javax.swing.JComboBox;
 import javax.swing.JLabel;
+import javax.swing.JOptionPane;
 
 public class ComponentComplexPanel extends JPanel {
 	JPanel panelCont = this;
@@ -160,11 +161,13 @@ public class ComponentComplexPanel extends JPanel {
 
 						Complex complex = new Complex();
 					} else {
-						// error no components
+		    			JOptionPane.showMessageDialog(ComponentComplexPanel.this,
+		    				    "Nincs komponens megadva");
 					}
 
 				}else{
-					//error name exists
+	    			JOptionPane.showMessageDialog(ComponentComplexPanel.this,
+	    				    "Mar letezik az alkatresz");
 				}
 			}
 		});
@@ -358,8 +361,10 @@ public class ComponentComplexPanel extends JPanel {
 						}
 						newUpdateElements=0;
 					} else {
-						// error no components
+		    			JOptionPane.showMessageDialog(ComponentComplexPanel.this,
+		    				    "Nincs komponens megadva");
 					}
+
 
 				
 			}
