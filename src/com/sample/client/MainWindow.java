@@ -183,7 +183,12 @@ public class MainWindow {
 	    	
 
 	    	if(type == TYPE_MANUF_NEW){
-		    	manufactureScopeHandlePanel = new ManufactureScopeHandlePanel();
+		    	try {
+					manufactureScopeHandlePanel = new ManufactureScopeHandlePanel();
+				} catch (NamingException e) {
+					// TODO Auto-generated catch block
+					e.printStackTrace();
+				}
 		    	newPanel = manufactureScopeHandlePanel;
 	    	}
 		    if(type == TYPE_ADMIN){

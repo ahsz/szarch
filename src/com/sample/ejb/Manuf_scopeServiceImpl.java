@@ -1,5 +1,6 @@
 package com.sample.ejb;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import javax.ejb.Remote;
@@ -12,9 +13,10 @@ import javax.persistence.TypedQuery;
 import javax.validation.ConstraintViolationException;
 
 import com.sample.jpa.entities.Manuf_scope;
+import com.sample.jpa.entities.User;
 
 @Stateless
-@Remote(UserService.class) 	
+@Remote(Manuf_scopeService.class) 	
 public class Manuf_scopeServiceImpl implements Manuf_scopeService {
 	
 	
@@ -112,5 +114,40 @@ public class Manuf_scopeServiceImpl implements Manuf_scopeService {
 		else
 			return 1;
 	}
+	
+	@Override
+	public Manuf_scope getManuf_scope(String name){
+		Manuf_scope manuf_scope=new Manuf_scope();
+		List<Manuf_scope> manuf_scope_list=new ArrayList<Manuf_scope>();
+		manuf_scope_list= getManuf_scope(manuf_scope);
+		
+		String[] manuf_ScopeNames= new String[manuf_scope_list.size()];
+		for(int i=0;i<manuf_scope_list.size();i++){
+			if(manuf_scope_list.get(i).getMs_id().equals(name))
+				manuf_scope=manuf_scope_list.get(i);
+		}
+		
+		
+		return manuf_scope;
+	}
+	
+	@Override
+	public String[] getAllManuf_scopeNames(){
+		Manuf_scope manuf_scope=new Manuf_scope();
+		
+		
+		List<Manuf_scope> manuf_scope_list=new ArrayList<Manuf_scope>();
+		manuf_scope_list= getManuf_scope(manuf_scope);
+		
+		String[] manuf_scopeNames= new String[manuf_scope_list.size()];
+		for(int i=0;i<manuf_scope_list.size();i++){
+			manuf_scopeNames[i]=manuf_scope_list.get(i).getMs_id();
+		}
+		
+		
+		
+		return manuf_scopeNames;
+	}
+		
 
 }

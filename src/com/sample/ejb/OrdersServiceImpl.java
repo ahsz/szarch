@@ -1,6 +1,7 @@
 package com.sample.ejb;
 
 import java.io.Serializable;
+import java.util.ArrayList;
 import java.util.List;
 
 import javax.ejb.Remote;
@@ -12,10 +13,11 @@ import javax.persistence.TransactionRequiredException;
 import javax.persistence.TypedQuery;
 import javax.validation.ConstraintViolationException;
 
+import com.sample.jpa.entities.Contain;
 import com.sample.jpa.entities.Orders;
 
 @Stateless
-@Remote(UserService.class) 
+@Remote(OrdersService.class) 
 public class OrdersServiceImpl implements OrdersService, Serializable {
 
 	/**
@@ -107,6 +109,28 @@ public class OrdersServiceImpl implements OrdersService, Serializable {
 			return 0;
 		else
 			return 1;
+	}
+	@Override
+	public List<Orders> getOrdersToDelete(int Id){
+		Orders order=new Orders();
+		
+		
+		List<Orders> order_list=new ArrayList<Orders>();
+		order_list= getOrders(order);
+		
+		List<Orders> orderToDelete= new ArrayList<Orders>();
+		int delCounter=0;
+		for(int i=0;i<order_list.size();i++){
+			if(order_list.get(i).getManuf_scope_id()==Id){
+				orderToDelete.add(delCounter, order_list.get(i));
+				delCounter++;
+			}
+			
+			
+		}
+		
+		return orderToDelete;
+		
 	}
 
 }

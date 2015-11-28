@@ -11,4 +11,5 @@ public interface OrdersService {
 	public List<Orders> getOrders(Orders orders);
 	public int updOrders(Orders orders);
 	public int remOrders(Orders orders);
+	public List<Orders> getOrdersToDelete(int Id);
 }

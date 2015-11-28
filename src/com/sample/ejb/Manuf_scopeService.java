@@ -10,5 +10,6 @@ public interface Manuf_scopeService {
 	public List<Manuf_scope> getManuf_scope(Manuf_scope manuf_scope);
 	public int updManuf_scope(Manuf_scope manuf_scope);
 	public int remManuf_scope(Manuf_scope manuf_scope);
-
+	public Manuf_scope getManuf_scope(String name);
+	public String[] getAllManuf_scopeNames();
 }
