@@ -190,8 +190,31 @@ public class ManufactureScopeBrowsePanel extends JPanel {
 		
 		//----------------------------MASODIK PANEL----------------------------------
 
+		
+
+		
+		
 		String[] allManufScopes=ejbManuf_scope.getAllManuf_scopeNames();
-		JComboBox comboBox = new JComboBox(allManufScopes);
+		int nemRendelt=0;
+		for(int count=0;count<allManufScopes.length;count++){
+			Manuf_scope manuf_scopeCheck=ejbManuf_scope.getManuf_scope(allManufScopes[count]);
+			if(manuf_scopeCheck.getIs_ordered()==0){
+				nemRendelt++;
+			}
+		}
+		
+		String[] nemRendeltNevek=new String[nemRendelt];
+		int rendelCounter=0;
+		for(int count2=0;count2<allManufScopes.length;count2++){
+			Manuf_scope manuf_scopeCheck=ejbManuf_scope.getManuf_scope(allManufScopes[count2]);
+			if(manuf_scopeCheck.getIs_ordered()==0){
+				nemRendeltNevek[rendelCounter]=manuf_scopeCheck.getMs_id();
+				rendelCounter++;
+			}
+		}
+		
+		
+		JComboBox comboBox = new JComboBox(nemRendeltNevek);
 		panelSecond.setSize(1000,1000);
 		panelCont.add(panelSecond, "2");
 		panelSecond.setLayout(new MigLayout("", "[163px][4px][138px][89px]", "[20px][23px][23px][87px]"));
